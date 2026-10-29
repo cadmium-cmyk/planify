@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --accent-color: #3584e4;
+    --accent-hover: #226ec7;
+  }
+}
+
+/* Theme styling */
+html {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+html.dark,
+html[data-appearance="dark"] {
+  color-scheme: dark;
+  background-color: #1e1e24;
+  color: #f3f4f6;
+}
+
+html[data-appearance="dark-blue"] {
+  color-scheme: dark;
+  background-color: #171d26;
+  color: #f1f5f9;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.4);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.6);
+}
