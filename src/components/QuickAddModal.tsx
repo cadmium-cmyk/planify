@@ -141,24 +141,24 @@ export const QuickAddModal: React.FC = () => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/40 backdrop-blur-xs animate-in fade-in duration-150"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-150"
       onClick={() => setIsQuickAddOpen(false)}
     >
       <div
-        className="w-full max-w-xl bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden"
+        className="w-full max-w-xl bg-white dark:bg-[#3B4252] rounded-2xl shadow-2xl border border-slate-200 dark:border-[#4C566A] overflow-hidden transition-colors"
         onClick={(e) => e.stopPropagation()}
       >
         <form onSubmit={handleSubmit}>
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-900/60">
-            <span className="font-semibold text-sm text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4 text-blue-500" />
+          <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-[#4C566A] bg-slate-50/60 dark:bg-[#2E3440]">
+            <span className="font-semibold text-sm text-slate-800 dark:text-[#ECEFF4] flex items-center gap-1.5">
+              <Sparkles className="w-4 h-4 text-[#88C0D0]" />
               Quick Add Task
             </span>
             <button
               type="button"
               onClick={() => setIsQuickAddOpen(false)}
-              className="p-1 rounded text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+              className="p-1 rounded text-slate-400 hover:text-slate-600 dark:hover:text-[#ECEFF4]"
             >
               <X className="w-4 h-4" />
             </button>
@@ -173,7 +173,7 @@ export const QuickAddModal: React.FC = () => {
                 placeholder='e.g. Finish report tomorrow #Work !p1 @urgent'
                 value={rawText}
                 onChange={(e) => handleInputChange(e.target.value)}
-                className="w-full text-base font-medium text-slate-900 dark:text-slate-100 bg-transparent outline-none placeholder:text-slate-400"
+                className="w-full text-base font-medium text-slate-900 dark:text-[#ECEFF4] bg-transparent outline-none placeholder:text-slate-400 dark:placeholder-[#D8DEE9]/60"
               />
             </div>
 
@@ -183,20 +183,20 @@ export const QuickAddModal: React.FC = () => {
                 placeholder="Description or notes (optional)..."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full text-xs p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 outline-none focus:border-blue-500 resize-none"
+                className="w-full text-xs p-2.5 rounded-lg bg-slate-50 dark:bg-[#2E3440] border border-slate-200 dark:border-[#4C566A] text-slate-800 dark:text-[#ECEFF4] outline-none focus:border-[#88C0D0] resize-none"
               />
             ) : (
               <button
                 type="button"
                 onClick={() => setShowDescription(true)}
-                className="text-xs text-slate-400 hover:text-blue-600 flex items-center gap-1"
+                className="text-xs text-slate-400 dark:text-[#D8DEE9] hover:text-[#5E81AC] dark:hover:text-[#88C0D0] flex items-center gap-1"
               >
                 + Add description
               </button>
             )}
 
             {/* Quick Picker Buttons */}
-            <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100 dark:border-slate-800 text-xs">
+            <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100 dark:border-[#4C566A] text-xs">
               {/* Due Date */}
               <div className="flex items-center gap-1">
                 <button
@@ -208,11 +208,11 @@ export const QuickAddModal: React.FC = () => {
                   }
                   className={`px-2 py-1 rounded-md border flex items-center gap-1 transition-colors ${
                     selectedDueDate === getFormattedDate(0)
-                      ? 'bg-blue-50 border-blue-400 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400'
-                      : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:border-slate-300'
+                      ? 'bg-[#5E81AC]/20 border-[#5E81AC] text-[#5E81AC] dark:bg-[#88C0D0]/20 dark:border-[#88C0D0] dark:text-[#88C0D0]'
+                      : 'border-slate-200 dark:border-[#4C566A] text-slate-600 dark:text-[#D8DEE9] hover:border-slate-300'
                   }`}
                 >
-                  <Calendar className="w-3 h-3 text-emerald-500" />
+                  <Calendar className="w-3 h-3 text-[#A3BE8C]" />
                   <span>Today</span>
                 </button>
                 <button
@@ -224,11 +224,11 @@ export const QuickAddModal: React.FC = () => {
                   }
                   className={`px-2 py-1 rounded-md border flex items-center gap-1 transition-colors ${
                     selectedDueDate === getFormattedDate(1)
-                      ? 'bg-blue-50 border-blue-400 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400'
-                      : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:border-slate-300'
+                      ? 'bg-[#5E81AC]/20 border-[#5E81AC] text-[#5E81AC] dark:bg-[#88C0D0]/20 dark:border-[#88C0D0] dark:text-[#88C0D0]'
+                      : 'border-slate-200 dark:border-[#4C566A] text-slate-600 dark:text-[#D8DEE9] hover:border-slate-300'
                   }`}
                 >
-                  <Clock className="w-3 h-3 text-cyan-500" />
+                  <Clock className="w-3 h-3 text-[#8FBCBB]" />
                   <span>Tomorrow</span>
                 </button>
               </div>
@@ -237,7 +237,7 @@ export const QuickAddModal: React.FC = () => {
               <select
                 value={selectedPriority}
                 onChange={(e) => setSelectedPriority(Number(e.target.value) as PriorityLevel)}
-                className="text-xs px-2 py-1 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 outline-none"
+                className="text-xs px-2 py-1 rounded-md border border-slate-200 dark:border-[#4C566A] bg-white dark:bg-[#2E3440] text-slate-700 dark:text-[#ECEFF4] outline-none"
               >
                 <option value={4}>🚩 P1 (High)</option>
                 <option value={3}>🚩 P2 (Medium)</option>
@@ -252,7 +252,7 @@ export const QuickAddModal: React.FC = () => {
                   setSelectedProjectId(e.target.value);
                   setSelectedSectionId('');
                 }}
-                className="text-xs px-2 py-1 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 outline-none"
+                className="text-xs px-2 py-1 rounded-md border border-slate-200 dark:border-[#4C566A] bg-white dark:bg-[#2E3440] text-slate-700 dark:text-[#ECEFF4] outline-none"
               >
                 {projects.map((p) => (
                   <option key={p.id} value={p.id}>
@@ -266,7 +266,7 @@ export const QuickAddModal: React.FC = () => {
                 <select
                   value={selectedSectionId}
                   onChange={(e) => setSelectedSectionId(e.target.value)}
-                  className="text-xs px-2 py-1 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 outline-none"
+                  className="text-xs px-2 py-1 rounded-md border border-slate-200 dark:border-[#4C566A] bg-white dark:bg-[#2E3440] text-slate-700 dark:text-[#ECEFF4] outline-none"
                 >
                   <option value="">Section: General</option>
                   {projectSections.map((s) => (
@@ -280,22 +280,22 @@ export const QuickAddModal: React.FC = () => {
           </div>
 
           {/* Footer Submit */}
-          <div className="flex items-center justify-between px-4 py-3 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
-            <span className="text-[11px] text-slate-400">
-              Tip: type <code className="font-mono bg-slate-200 dark:bg-slate-800 px-1 py-0.5 rounded">#project</code>, <code className="font-mono bg-slate-200 dark:bg-slate-800 px-1 py-0.5 rounded">!p1</code>, or <code className="font-mono bg-slate-200 dark:bg-slate-800 px-1 py-0.5 rounded">tomorrow</code>
+          <div className="flex items-center justify-between px-4 py-3 bg-slate-50 dark:bg-[#2E3440] border-t border-slate-200 dark:border-[#4C566A]">
+            <span className="text-[11px] text-slate-400 dark:text-[#D8DEE9]/70">
+              Tip: type <code className="font-mono bg-slate-200 dark:bg-[#434C5E] px-1 py-0.5 rounded text-slate-700 dark:text-[#ECEFF4]">#project</code>, <code className="font-mono bg-slate-200 dark:bg-[#434C5E] px-1 py-0.5 rounded text-slate-700 dark:text-[#ECEFF4]">!p1</code>, or <code className="font-mono bg-slate-200 dark:bg-[#434C5E] px-1 py-0.5 rounded text-slate-700 dark:text-[#ECEFF4]">tomorrow</code>
             </span>
             <div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={() => setIsQuickAddOpen(false)}
-                className="px-3 py-1.5 text-xs text-slate-600 dark:text-slate-400 hover:text-slate-800"
+                className="px-3 py-1.5 text-xs text-slate-600 dark:text-[#D8DEE9] hover:text-slate-800 dark:hover:text-[#ECEFF4]"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={!rawText.trim()}
-                className="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white rounded-lg text-xs font-medium shadow-xs"
+                className="px-4 py-1.5 bg-[#5E81AC] hover:bg-[#81A1C1] disabled:opacity-50 text-white rounded-lg text-xs font-semibold shadow-xs"
               >
                 Add Task
               </button>

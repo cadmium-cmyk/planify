@@ -74,29 +74,29 @@ export const App: React.FC = () => {
     );
 
     return (
-      <div className="flex h-screen w-screen overflow-hidden bg-slate-50 dark:bg-slate-950">
+      <div className="flex h-screen w-screen overflow-hidden bg-slate-50 dark:bg-[#2E3440] transition-colors">
         <Sidebar />
         <div className="flex-1 flex flex-col min-w-0 h-full">
           <HeaderBar />
           <main className="flex-1 overflow-y-auto p-4 sm:p-6 max-w-4xl mx-auto w-full space-y-4">
-            <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
-              <h2 className="text-base font-semibold text-slate-800 dark:text-slate-100 flex items-center gap-2">
-                <Search className="w-4 h-4 text-blue-500" />
+            <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-[#4C566A]">
+              <h2 className="text-base font-semibold text-slate-800 dark:text-[#ECEFF4] flex items-center gap-2">
+                <Search className="w-4 h-4 text-[#88C0D0]" />
                 <span>Search results for "{searchQuery}"</span>
-                <span className="text-xs px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-normal">
+                <span className="text-xs px-2 py-0.5 rounded-full bg-slate-200 dark:bg-[#3B4252] text-slate-600 dark:text-[#ECEFF4] font-normal">
                   {matchingTasks.length} {matchingTasks.length === 1 ? 'task' : 'tasks'}
                 </span>
               </h2>
               <button
                 onClick={() => setSearchQuery('')}
-                className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                className="text-xs text-[#5E81AC] dark:text-[#88C0D0] hover:underline"
               >
                 Clear search
               </button>
             </div>
 
             {matchingTasks.length === 0 ? (
-              <div className="py-12 text-center text-slate-400 space-y-2">
+              <div className="py-12 text-center text-slate-400 dark:text-[#D8DEE9] space-y-2">
                 <Search className="w-10 h-10 mx-auto opacity-30" />
                 <p className="text-sm">No tasks matched your query.</p>
               </div>
@@ -121,7 +121,7 @@ export const App: React.FC = () => {
   // Handle Scheduled view
   if (activeView.type === 'filter' && activeView.id === 'scheduled') {
     return (
-      <div className="flex h-screen w-screen overflow-hidden bg-slate-50 dark:bg-slate-950">
+      <div className="flex h-screen w-screen overflow-hidden bg-slate-50 dark:bg-[#2E3440] transition-colors">
         <Sidebar />
         <div className="flex-1 flex flex-col min-w-0 h-full">
           <HeaderBar />
@@ -139,7 +139,7 @@ export const App: React.FC = () => {
   // Handle Labels view
   if (activeView.type === 'filter' && activeView.id === 'labels') {
     return (
-      <div className="flex h-screen w-screen overflow-hidden bg-slate-50 dark:bg-slate-950">
+      <div className="flex h-screen w-screen overflow-hidden bg-slate-50 dark:bg-[#2E3440] transition-colors">
         <Sidebar />
         <div className="flex-1 flex flex-col min-w-0 h-full">
           <HeaderBar />
@@ -161,7 +161,7 @@ export const App: React.FC = () => {
 
     if (project.view_mode === 'board') {
       return (
-        <div className="flex h-screen w-screen overflow-hidden bg-slate-50 dark:bg-slate-950">
+        <div className="flex h-screen w-screen overflow-hidden bg-slate-50 dark:bg-[#2E3440] transition-colors">
           <Sidebar />
           <div className="flex-1 flex flex-col min-w-0 h-full">
             <HeaderBar />
@@ -204,18 +204,18 @@ export const App: React.FC = () => {
     };
 
     return (
-      <div className="flex h-screen w-screen overflow-hidden bg-slate-50 dark:bg-slate-950">
+      <div className="flex h-screen w-screen overflow-hidden bg-slate-50 dark:bg-[#2E3440] transition-colors">
         <Sidebar />
         <div className="flex-1 flex flex-col min-w-0 h-full">
           <HeaderBar />
           <main className="flex-1 overflow-y-auto p-4 sm:p-6 max-w-4xl mx-auto w-full space-y-6">
             {/* Project Header Banner */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xs">
+            <div className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#3B4252] border border-slate-200 dark:border-[#4C566A] shadow-2xs">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex items-center gap-3">
                   {project.emoji && <span className="text-3xl">{project.emoji}</span>}
                   <div>
-                    <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+                    <h2 className="text-xl font-bold text-slate-800 dark:text-[#ECEFF4] flex items-center gap-2">
                       <span
                         className="w-3 h-3 rounded-full"
                         style={{ backgroundColor: project.color }}
@@ -223,7 +223,7 @@ export const App: React.FC = () => {
                       <span>{project.name}</span>
                     </h2>
                     {project.description && (
-                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                      <p className="text-xs text-slate-500 dark:text-[#D8DEE9] mt-1">
                         {project.description}
                       </p>
                     )}
@@ -233,7 +233,7 @@ export const App: React.FC = () => {
                 <div className="flex items-center gap-1.5">
                   <button
                     onClick={() => setEditingProject(project)}
-                    className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                    className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-[#ECEFF4] hover:bg-slate-100 dark:hover:bg-[#434C5E] transition-colors"
                     title="Edit project"
                   >
                     <Edit2 className="w-4 h-4" />
@@ -245,7 +245,7 @@ export const App: React.FC = () => {
                           deleteProject(project.id);
                         }
                       }}
-                      className="p-1.5 rounded-lg text-slate-400 hover:text-red-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                      className="p-1.5 rounded-lg text-slate-400 hover:text-[#BF616A] hover:bg-slate-100 dark:hover:bg-[#434C5E] transition-colors"
                       title="Delete project"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -255,11 +255,11 @@ export const App: React.FC = () => {
               </div>
 
               {/* Progress bar */}
-              <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500">
+              <div className="mt-4 pt-3 border-t border-slate-100 dark:border-[#4C566A] flex items-center justify-between text-xs text-slate-500 dark:text-[#D8DEE9]">
                 <span>
                   {projectTasks.length} pending, {completedProjectTasks.length} completed
                 </span>
-                <span className="font-semibold text-slate-700 dark:text-slate-300">
+                <span className="font-semibold text-slate-700 dark:text-[#ECEFF4]">
                   {projectTasks.length + completedProjectTasks.length > 0
                     ? Math.round(
                         (completedProjectTasks.length /
@@ -276,7 +276,7 @@ export const App: React.FC = () => {
             {unsectionedTasks.length > 0 && (
               <div className="space-y-2">
                 {projectSections.length > 0 && (
-                  <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider px-1">
+                  <h3 className="text-xs font-semibold text-slate-500 dark:text-[#D8DEE9] uppercase tracking-wider px-1">
                     General
                   </h3>
                 )}
@@ -292,18 +292,18 @@ export const App: React.FC = () => {
 
               return (
                 <div key={sec.id} className="space-y-2">
-                  <div className="flex items-center justify-between py-1 border-b border-slate-200 dark:border-slate-800 group">
+                  <div className="flex items-center justify-between py-1 border-b border-slate-200 dark:border-[#4C566A] group">
                     <button
                       onClick={() => toggleSectionCollapse(sec.id)}
-                      className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300"
+                      className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-[#ECEFF4]"
                     >
                       {sec.collapsed ? (
-                        <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+                        <ChevronRight className="w-3.5 h-3.5 text-slate-400 dark:text-[#D8DEE9]" />
                       ) : (
-                        <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                        <ChevronDown className="w-3.5 h-3.5 text-slate-400 dark:text-[#D8DEE9]" />
                       )}
                       <span>{sec.name}</span>
-                      <span className="text-[11px] px-1.5 py-0.2 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-normal">
+                      <span className="text-[11px] px-1.5 py-0.2 rounded-full bg-slate-200 dark:bg-[#434C5E] text-slate-600 dark:text-[#ECEFF4] font-normal">
                         {secTasks.length}
                       </span>
                     </button>
@@ -311,7 +311,7 @@ export const App: React.FC = () => {
                     <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                       <button
                         onClick={() => setActiveInlineSectionId(sec.id)}
-                        className="p-1 rounded text-slate-400 hover:text-blue-600"
+                        className="p-1 rounded text-slate-400 hover:text-[#5E81AC] dark:hover:text-[#88C0D0]"
                         title="Add task in section"
                       >
                         <Plus className="w-3.5 h-3.5" />
@@ -321,7 +321,7 @@ export const App: React.FC = () => {
                           const n = prompt('Rename section:', sec.name);
                           if (n && n.trim()) updateSection(sec.id, { name: n.trim() });
                         }}
-                        className="p-1 rounded text-slate-400 hover:text-slate-600"
+                        className="p-1 rounded text-slate-400 hover:text-slate-600 dark:hover:text-[#ECEFF4]"
                         title="Rename section"
                       >
                         <Edit2 className="w-3 h-3" />
@@ -332,7 +332,7 @@ export const App: React.FC = () => {
                             deleteSection(sec.id);
                           }
                         }}
-                        className="p-1 rounded text-slate-400 hover:text-red-500"
+                        className="p-1 rounded text-slate-400 hover:text-[#BF616A]"
                         title="Delete section"
                       >
                         <Trash2 className="w-3 h-3" />
@@ -347,7 +347,7 @@ export const App: React.FC = () => {
                       ))}
 
                       {activeInlineSectionId === sec.id ? (
-                        <div className="flex items-center gap-2 p-2 rounded-xl bg-white dark:bg-slate-900 border border-blue-400">
+                        <div className="flex items-center gap-2 p-2 rounded-xl bg-white dark:bg-[#3B4252] border border-[#88C0D0]">
                           <input
                             type="text"
                             autoFocus
@@ -358,11 +358,11 @@ export const App: React.FC = () => {
                               if (e.key === 'Enter') handleAddInlineTask(sec.id);
                               if (e.key === 'Escape') setActiveInlineSectionId(null);
                             }}
-                            className="flex-1 text-xs text-slate-800 dark:text-slate-100 bg-transparent outline-none"
+                            className="flex-1 text-xs text-slate-800 dark:text-[#ECEFF4] bg-transparent outline-none"
                           />
                           <button
                             onClick={() => handleAddInlineTask(sec.id)}
-                            className="px-2.5 py-1 text-xs bg-blue-600 text-white rounded-md font-medium"
+                            className="px-2.5 py-1 text-xs bg-[#5E81AC] hover:bg-[#81A1C1] text-white rounded-md font-medium"
                           >
                             Add
                           </button>
@@ -370,7 +370,7 @@ export const App: React.FC = () => {
                       ) : (
                         <button
                           onClick={() => setActiveInlineSectionId(sec.id)}
-                          className="w-full py-1.5 flex items-center gap-1.5 text-xs text-slate-400 hover:text-blue-600 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg px-2 transition-colors"
+                          className="w-full py-1.5 flex items-center gap-1.5 text-xs text-slate-400 hover:text-[#5E81AC] dark:hover:text-[#88C0D0] hover:bg-slate-100 dark:hover:bg-[#3B4252] rounded-lg px-2 transition-colors"
                         >
                           <Plus className="w-3.5 h-3.5" />
                           <span>Add Task</span>
@@ -386,13 +386,13 @@ export const App: React.FC = () => {
             <div className="pt-2 flex items-center gap-3">
               <button
                 onClick={() => setIsQuickAddOpen(true)}
-                className="flex items-center gap-1.5 text-xs font-medium text-blue-600 dark:text-blue-400 hover:underline"
+                className="flex items-center gap-1.5 text-xs font-medium text-[#5E81AC] dark:text-[#88C0D0] hover:underline"
               >
                 <Plus className="w-4 h-4" />
                 <span>Add Task to {project.name}</span>
               </button>
 
-              <span className="text-slate-300 dark:text-slate-700">|</span>
+              <span className="text-slate-300 dark:text-[#4C566A]">|</span>
 
               {isAddingSection ? (
                 <form onSubmit={handleCreateSection} className="flex items-center gap-2">
@@ -402,18 +402,18 @@ export const App: React.FC = () => {
                     placeholder="Section name..."
                     value={inlineSectionInput}
                     onChange={(e) => setInlineSectionInput(e.target.value)}
-                    className="text-xs px-2.5 py-1 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 outline-none"
+                    className="text-xs px-2.5 py-1 rounded-md border border-slate-200 dark:border-[#4C566A] bg-white dark:bg-[#3B4252] text-slate-800 dark:text-[#ECEFF4] outline-none"
                   />
                   <button
                     type="submit"
-                    className="px-2.5 py-1 text-xs bg-blue-600 text-white rounded-md font-medium"
+                    className="px-2.5 py-1 text-xs bg-[#5E81AC] text-white rounded-md font-medium"
                   >
                     Add
                   </button>
                   <button
                     type="button"
                     onClick={() => setIsAddingSection(false)}
-                    className="text-xs text-slate-400 hover:text-slate-600"
+                    className="text-xs text-slate-400 hover:text-slate-600 dark:hover:text-[#ECEFF4]"
                   >
                     Cancel
                   </button>
@@ -421,7 +421,7 @@ export const App: React.FC = () => {
               ) : (
                 <button
                   onClick={() => setIsAddingSection(true)}
-                  className="flex items-center gap-1.5 text-xs font-medium text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
+                  className="flex items-center gap-1.5 text-xs font-medium text-slate-500 hover:text-slate-800 dark:text-[#D8DEE9] dark:hover:text-[#ECEFF4] transition-colors"
                 >
                   <FolderPlus className="w-4 h-4" />
                   <span>Add Section</span>
@@ -445,27 +445,27 @@ export const App: React.FC = () => {
     const labelTasks = items.filter((i) => i.labels.includes(activeView.id) && !i.completed);
 
     return (
-      <div className="flex h-screen w-screen overflow-hidden bg-slate-50 dark:bg-slate-950">
+      <div className="flex h-screen w-screen overflow-hidden bg-slate-50 dark:bg-[#2E3440] transition-colors">
         <Sidebar />
         <div className="flex-1 flex flex-col min-w-0 h-full">
           <HeaderBar />
           <main className="flex-1 overflow-y-auto p-4 sm:p-6 max-w-4xl mx-auto w-full space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-[#4C566A]">
               <div className="flex items-center gap-2.5">
                 <span
                   className="w-3.5 h-3.5 rounded-full"
                   style={{ backgroundColor: lbl?.color }}
                 />
-                <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">
+                <h2 className="text-xl font-bold text-slate-800 dark:text-[#ECEFF4]">
                   @{lbl?.name}
                 </h2>
-                <span className="text-xs px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-medium">
+                <span className="text-xs px-2 py-0.5 rounded-full bg-slate-200 dark:bg-[#3B4252] text-slate-600 dark:text-[#ECEFF4] font-medium">
                   {labelTasks.length}
                 </span>
               </div>
               <button
                 onClick={() => setIsQuickAddOpen(true)}
-                className="flex items-center gap-1 text-xs text-blue-600 hover:underline"
+                className="flex items-center gap-1 text-xs text-[#5E81AC] dark:text-[#88C0D0] hover:underline"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Add task</span>
@@ -473,7 +473,7 @@ export const App: React.FC = () => {
             </div>
 
             {labelTasks.length === 0 ? (
-              <p className="text-xs text-slate-400 py-8 text-center italic">
+              <p className="text-xs text-slate-400 dark:text-[#D8DEE9] py-8 text-center italic">
                 No active tasks with this label.
               </p>
             ) : (
@@ -556,24 +556,24 @@ export const App: React.FC = () => {
       : 0;
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-slate-50 dark:bg-slate-950">
+    <div className="flex h-screen w-screen overflow-hidden bg-slate-50 dark:bg-[#2E3440] transition-colors">
       <Sidebar />
       <div className="flex-1 flex flex-col min-w-0 h-full">
         <HeaderBar />
         <main className="flex-1 overflow-y-auto p-4 sm:p-6 max-w-4xl mx-auto w-full space-y-4">
           {/* Header */}
-          <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+          <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-[#4C566A]">
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">
+                <h2 className="text-xl font-bold text-slate-800 dark:text-[#ECEFF4]">
                   {filterTitle}
                 </h2>
-                <span className="text-xs px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-medium">
+                <span className="text-xs px-2 py-0.5 rounded-full bg-slate-200 dark:bg-[#3B4252] text-slate-600 dark:text-[#ECEFF4] font-medium">
                   {filterTasks.length}
                 </span>
               </div>
               {filterSubtitle && (
-                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                <p className="text-xs text-slate-500 dark:text-[#D8DEE9] mt-0.5">
                   {filterSubtitle}
                 </p>
               )}
@@ -582,7 +582,7 @@ export const App: React.FC = () => {
             {filterId !== 'completed' && (
               <button
                 onClick={() => setIsQuickAddOpen(true)}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs sm:text-sm font-medium shadow-xs transition-colors"
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-[#5E81AC] hover:bg-[#81A1C1] text-white rounded-lg text-xs sm:text-sm font-medium shadow-xs transition-colors"
               >
                 <Plus className="w-4 h-4" />
                 <span>Add Task</span>
@@ -592,7 +592,7 @@ export const App: React.FC = () => {
 
           {/* Overdue alert for Today view */}
           {overdueCountInToday > 0 && (
-            <div className="p-3 rounded-xl bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/60 text-xs text-rose-700 dark:text-rose-300 flex items-center justify-between">
+            <div className="p-3 rounded-xl bg-rose-50 dark:bg-[#BF616A]/20 border border-rose-200 dark:border-[#BF616A]/40 text-xs text-rose-700 dark:text-[#BF616A] flex items-center justify-between font-medium">
               <span>
                 You have {overdueCountInToday} overdue {overdueCountInToday === 1 ? 'task' : 'tasks'} carried over into today.
               </span>
@@ -601,15 +601,15 @@ export const App: React.FC = () => {
 
           {/* Task List */}
           {filterTasks.length === 0 ? (
-            <div className="py-16 text-center text-slate-400 space-y-2">
-              <CheckCircle2 className="w-12 h-12 mx-auto opacity-20 text-blue-500" />
-              <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
+            <div className="py-16 text-center text-slate-400 dark:text-[#D8DEE9] space-y-2">
+              <CheckCircle2 className="w-12 h-12 mx-auto opacity-30 text-[#88C0D0]" />
+              <p className="text-sm font-medium text-slate-600 dark:text-[#ECEFF4]">
                 {filterId === 'completed' ? 'No completed tasks yet.' : 'All clear! No tasks in this view.'}
               </p>
               {filterId !== 'completed' && (
                 <button
                   onClick={() => setIsQuickAddOpen(true)}
-                  className="mt-2 inline-flex items-center gap-1 text-xs text-blue-600 hover:underline"
+                  className="mt-2 inline-flex items-center gap-1 text-xs text-[#5E81AC] dark:text-[#88C0D0] hover:underline"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   <span>Create a task</span>

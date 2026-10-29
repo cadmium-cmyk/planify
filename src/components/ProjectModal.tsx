@@ -127,21 +127,21 @@ export const ProjectModal: React.FC = () => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs animate-in fade-in duration-150"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-150"
       onClick={handleClose}
     >
       <div
-        className="w-full max-w-md bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-5 space-y-4"
+        className="w-full max-w-md bg-white dark:bg-[#3B4252] rounded-2xl shadow-xl border border-slate-200 dark:border-[#4C566A] p-5 space-y-4 transition-colors"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between">
-          <h3 className="font-semibold text-base text-slate-800 dark:text-slate-100 flex items-center gap-2">
-            <Folder className="w-5 h-5 text-blue-600" />
+          <h3 className="font-semibold text-base text-slate-800 dark:text-[#ECEFF4] flex items-center gap-2">
+            <Folder className="w-5 h-5 text-[#5E81AC] dark:text-[#88C0D0]" />
             <span>{editingProject ? 'Edit Project' : 'New Project'}</span>
           </h3>
           <button
             onClick={handleClose}
-            className="p-1 rounded text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+            className="p-1 rounded text-slate-400 hover:text-slate-600 dark:hover:text-[#ECEFF4]"
           >
             <X className="w-4 h-4" />
           </button>
@@ -149,7 +149,7 @@ export const ProjectModal: React.FC = () => {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
+            <label className="block text-xs font-medium text-slate-600 dark:text-[#D8DEE9] mb-1">
               Project Name
             </label>
             <input
@@ -158,12 +158,12 @@ export const ProjectModal: React.FC = () => {
               placeholder="e.g. Website Launch, Home Maintenance"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full text-sm px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white outline-none focus:border-blue-500"
+              className="w-full text-sm px-3 py-2 rounded-xl border border-slate-200 dark:border-[#4C566A] bg-slate-50 dark:bg-[#2E3440] text-slate-900 dark:text-[#ECEFF4] outline-none focus:border-[#88C0D0]"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
+            <label className="block text-xs font-medium text-slate-600 dark:text-[#D8DEE9] mb-1">
               Description (optional)
             </label>
             <input
@@ -171,23 +171,23 @@ export const ProjectModal: React.FC = () => {
               placeholder="Goal, timeline, or notes..."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white outline-none focus:border-blue-500"
+              className="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 dark:border-[#4C566A] bg-slate-50 dark:bg-[#2E3440] text-slate-900 dark:text-[#ECEFF4] outline-none focus:border-[#88C0D0]"
             />
           </div>
 
           {/* Icon Type Selection */}
           <div>
-            <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">
+            <label className="block text-xs font-medium text-slate-600 dark:text-[#D8DEE9] mb-1.5">
               Icon Style
             </label>
-            <div className="flex items-center gap-1 p-0.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs mb-2">
+            <div className="flex items-center gap-1 p-0.5 rounded-lg bg-slate-100 dark:bg-[#2E3440] text-xs mb-2">
               <button
                 type="button"
                 onClick={() => setIconType('symbolic')}
                 className={`flex-1 py-1 rounded-md transition-colors ${
                   iconType === 'symbolic'
-                    ? 'bg-white dark:bg-slate-700 font-semibold text-slate-900 dark:text-white shadow-xs'
-                    : 'text-slate-500'
+                    ? 'bg-white dark:bg-[#434C5E] font-semibold text-slate-900 dark:text-[#ECEFF4] shadow-xs'
+                    : 'text-slate-500 dark:text-[#D8DEE9]'
                 }`}
               >
                 Symbolic Icon
@@ -197,8 +197,8 @@ export const ProjectModal: React.FC = () => {
                 onClick={() => setIconType('emoji')}
                 className={`flex-1 py-1 rounded-md transition-colors ${
                   iconType === 'emoji'
-                    ? 'bg-white dark:bg-slate-700 font-semibold text-slate-900 dark:text-white shadow-xs'
-                    : 'text-slate-500'
+                    ? 'bg-white dark:bg-[#434C5E] font-semibold text-slate-900 dark:text-[#ECEFF4] shadow-xs'
+                    : 'text-slate-500 dark:text-[#D8DEE9]'
                 }`}
               >
                 Emoji
@@ -208,8 +208,8 @@ export const ProjectModal: React.FC = () => {
                 onClick={() => setIconType('none')}
                 className={`flex-1 py-1 rounded-md transition-colors ${
                   iconType === 'none'
-                    ? 'bg-white dark:bg-slate-700 font-semibold text-slate-900 dark:text-white shadow-xs'
-                    : 'text-slate-500'
+                    ? 'bg-white dark:bg-[#434C5E] font-semibold text-slate-900 dark:text-[#ECEFF4] shadow-xs'
+                    : 'text-slate-500 dark:text-[#D8DEE9]'
                 }`}
               >
                 Color Dot
@@ -218,7 +218,7 @@ export const ProjectModal: React.FC = () => {
 
             {/* Symbolic Icon Choices */}
             {iconType === 'symbolic' && (
-              <div className="flex flex-wrap gap-1.5 max-h-28 overflow-y-auto p-1 border border-slate-200 dark:border-slate-700/80 rounded-xl bg-slate-50 dark:bg-slate-850">
+              <div className="flex flex-wrap gap-1.5 max-h-28 overflow-y-auto p-1 border border-slate-200 dark:border-[#4C566A] rounded-xl bg-slate-50 dark:bg-[#2E3440]">
                 {SYMBOLIC_ICONS.map((iconItem) => (
                   <button
                     key={iconItem.id}
@@ -227,8 +227,8 @@ export const ProjectModal: React.FC = () => {
                     title={iconItem.name}
                     className={`p-2 rounded-lg flex items-center justify-center transition-colors ${
                       iconSymbolic === iconItem.id
-                        ? 'bg-blue-600 text-white font-medium shadow-2xs'
-                        : 'text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-750'
+                        ? 'bg-[#5E81AC] text-white font-medium shadow-2xs'
+                        : 'text-slate-600 dark:text-[#ECEFF4] hover:bg-slate-200 dark:hover:bg-[#434C5E]'
                     }`}
                   >
                     {renderSymbolicIconPreview(iconItem.id)}
@@ -239,7 +239,7 @@ export const ProjectModal: React.FC = () => {
 
             {/* Optional Emoji Picker */}
             {iconType === 'emoji' && (
-              <div className="flex flex-wrap gap-1.5 p-1 border border-slate-200 dark:border-slate-700/80 rounded-xl bg-slate-50 dark:bg-slate-850">
+              <div className="flex flex-wrap gap-1.5 p-1 border border-slate-200 dark:border-[#4C566A] rounded-xl bg-slate-50 dark:bg-[#2E3440]">
                 {EMOJI_OPTIONS.map((e) => (
                   <button
                     key={e}
@@ -247,8 +247,8 @@ export const ProjectModal: React.FC = () => {
                     onClick={() => setEmoji(e)}
                     className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm border transition-colors ${
                       emoji === e
-                        ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/40 ring-1 ring-blue-500'
-                        : 'border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800'
+                        ? 'border-[#88C0D0] bg-[#5E81AC]/20 ring-1 ring-[#88C0D0]'
+                        : 'border-slate-200 dark:border-[#4C566A] hover:bg-slate-100 dark:hover:bg-[#434C5E]'
                     }`}
                   >
                     {e}
@@ -260,7 +260,7 @@ export const ProjectModal: React.FC = () => {
 
           {/* Color Picker */}
           <div>
-            <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">
+            <label className="block text-xs font-medium text-slate-600 dark:text-[#D8DEE9] mb-1.5">
               Theme Color
             </label>
             <div className="grid grid-cols-10 gap-2">
@@ -271,7 +271,7 @@ export const ProjectModal: React.FC = () => {
                   onClick={() => setColor(c.hex)}
                   title={c.name}
                   className={`w-6 h-6 rounded-full transition-transform ${
-                    color === c.hex ? 'scale-125 ring-2 ring-offset-2 ring-blue-500' : 'hover:scale-110'
+                    color === c.hex ? 'scale-125 ring-2 ring-offset-2 ring-[#88C0D0]' : 'hover:scale-110'
                   }`}
                   style={{ backgroundColor: c.hex }}
                 />
@@ -280,19 +280,19 @@ export const ProjectModal: React.FC = () => {
           </div>
 
           {/* View Mode & Favorite toggles */}
-          <div className="pt-2 border-t border-slate-100 dark:border-slate-800 grid grid-cols-2 gap-3">
+          <div className="pt-2 border-t border-slate-100 dark:border-[#4C566A] grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
+              <label className="block text-xs font-medium text-slate-600 dark:text-[#D8DEE9] mb-1">
                 Default Layout
               </label>
-              <div className="flex items-center gap-1 p-0.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs">
+              <div className="flex items-center gap-1 p-0.5 rounded-lg bg-slate-100 dark:bg-[#2E3440] text-xs">
                 <button
                   type="button"
                   onClick={() => setViewMode('list')}
                   className={`flex-1 flex items-center justify-center gap-1 py-1 rounded-md transition-colors ${
                     viewMode === 'list'
-                      ? 'bg-white dark:bg-slate-700 font-medium text-slate-900 dark:text-white shadow-xs'
-                      : 'text-slate-500'
+                      ? 'bg-white dark:bg-[#434C5E] font-medium text-slate-900 dark:text-[#ECEFF4] shadow-xs'
+                      : 'text-slate-500 dark:text-[#D8DEE9]'
                   }`}
                 >
                   <LayoutList className="w-3.5 h-3.5" />
@@ -303,8 +303,8 @@ export const ProjectModal: React.FC = () => {
                   onClick={() => setViewMode('board')}
                   className={`flex-1 flex items-center justify-center gap-1 py-1 rounded-md transition-colors ${
                     viewMode === 'board'
-                      ? 'bg-white dark:bg-slate-700 font-medium text-slate-900 dark:text-white shadow-xs'
-                      : 'text-slate-500'
+                      ? 'bg-white dark:bg-[#434C5E] font-medium text-slate-900 dark:text-[#ECEFF4] shadow-xs'
+                      : 'text-slate-500 dark:text-[#D8DEE9]'
                   }`}
                 >
                   <Kanban className="w-3.5 h-3.5" />
@@ -319,10 +319,10 @@ export const ProjectModal: React.FC = () => {
                   type="checkbox"
                   checked={isFavorite}
                   onChange={(e) => setIsFavorite(e.target.checked)}
-                  className="rounded text-blue-600"
+                  className="rounded text-[#5E81AC]"
                 />
-                <span className="text-xs text-slate-700 dark:text-slate-300 flex items-center gap-1">
-                  <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+                <span className="text-xs text-slate-700 dark:text-[#ECEFF4] flex items-center gap-1">
+                  <Star className="w-3.5 h-3.5 text-[#EBCB8B] fill-[#EBCB8B]" />
                   Add to Favorites
                 </span>
               </label>
@@ -330,18 +330,18 @@ export const ProjectModal: React.FC = () => {
           </div>
 
           {/* Footer Submit */}
-          <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+          <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100 dark:border-[#4C566A]">
             <button
               type="button"
               onClick={handleClose}
-              className="px-3 py-1.5 text-xs text-slate-600 dark:text-slate-400"
+              className="px-3 py-1.5 text-xs text-slate-600 dark:text-[#D8DEE9]"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={!name.trim()}
-              className="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white rounded-lg text-xs font-medium shadow-xs"
+              className="px-4 py-1.5 bg-[#5E81AC] hover:bg-[#81A1C1] disabled:opacity-50 text-white rounded-lg text-xs font-semibold shadow-xs"
             >
               {editingProject ? 'Save Changes' : 'Create Project'}
             </button>

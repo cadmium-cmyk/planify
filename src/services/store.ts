@@ -1,8 +1,8 @@
 import { Item, Project, Section, Label, AppearanceMode, CalendarFeed, CalendarEvent } from '../types/planify';
-import { NextcloudConfig, DEFAULT_NEXTCLOUD_CONFIG } from './nextcloud';
+import { CaldavConfig, DEFAULT_CALDAV_CONFIG } from './caldav';
 import { INITIAL_CALENDAR_FEEDS, INITIAL_CALENDAR_EVENTS } from './calendar';
 
-export const STORAGE_KEY = 'planify_app_state_v1';
+export const STORAGE_KEY = 'planify_app_state_v3';
 
 export interface PlanifyState {
   items: Item[];
@@ -14,7 +14,7 @@ export interface PlanifyState {
   appearance: AppearanceMode;
   dailyGoal: number;
   soundEnabled: boolean;
-  nextcloud: NextcloudConfig;
+  caldav: CaldavConfig;
 }
 
 export function generateId(prefix = 'id'): string {
@@ -58,7 +58,7 @@ const INITIAL_PROJECTS: Project[] = [
   {
     id: 'proj_inbox',
     name: 'Inbox',
-    description: 'General task list',
+    description: '',
     color: '#3584e4',
     icon_type: 'symbolic',
     icon_symbolic: 'folder',
@@ -91,7 +91,7 @@ export function getInitialState(): PlanifyState {
             appearance: parsed.appearance || 'light',
             dailyGoal: parsed.dailyGoal || 5,
             soundEnabled: parsed.soundEnabled ?? true,
-            nextcloud: parsed.nextcloud || DEFAULT_NEXTCLOUD_CONFIG,
+            caldav: parsed.caldav || DEFAULT_CALDAV_CONFIG,
           };
         }
       }
@@ -110,7 +110,7 @@ export function getInitialState(): PlanifyState {
     appearance: 'light',
     dailyGoal: 5,
     soundEnabled: true,
-    nextcloud: DEFAULT_NEXTCLOUD_CONFIG,
+    caldav: DEFAULT_CALDAV_CONFIG,
   };
 }
 

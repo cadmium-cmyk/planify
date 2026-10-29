@@ -81,21 +81,21 @@ export const TaskBoard: React.FC<TaskBoardProps> = ({ project, tasks, sections }
         <div
           onDragOver={handleDragOver}
           onDrop={(e) => handleDrop(e, undefined)}
-          className="w-72 sm:w-80 shrink-0 flex flex-col max-h-full rounded-2xl bg-slate-100/80 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/80 p-3"
+          className="w-72 sm:w-80 shrink-0 flex flex-col max-h-full rounded-2xl bg-slate-100/80 dark:bg-[#3B4252] border border-slate-200/80 dark:border-[#4C566A] p-3"
         >
           {/* Column Header */}
-          <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-200/60 dark:border-slate-800/60">
+          <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-200/60 dark:border-[#4C566A]">
             <div className="flex items-center gap-2">
-              <span className="font-semibold text-xs uppercase tracking-wider text-slate-700 dark:text-slate-300">
+              <span className="font-semibold text-xs uppercase tracking-wider text-slate-700 dark:text-[#ECEFF4]">
                 General
               </span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-medium">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-slate-200 dark:bg-[#434C5E] text-slate-600 dark:text-[#ECEFF4] font-medium">
                 {unsectionedTasks.length}
               </span>
             </div>
             <button
               onClick={() => setActiveTaskInputSection('no_section')}
-              className="p-1 rounded-md hover:bg-slate-200/60 dark:hover:bg-slate-800 text-slate-500 hover:text-blue-600 transition-colors"
+              className="p-1 rounded-md hover:bg-slate-200/60 dark:hover:bg-[#434C5E] text-slate-500 dark:text-[#D8DEE9] hover:text-[#5E81AC] dark:hover:text-[#88C0D0] transition-colors"
               title="Add task to General"
             >
               <Plus className="w-4 h-4" />
@@ -117,7 +117,7 @@ export const TaskBoard: React.FC<TaskBoardProps> = ({ project, tasks, sections }
 
             {/* Quick add input in column */}
             {activeTaskInputSection === 'no_section' ? (
-              <div className="bg-white dark:bg-slate-800 p-2 rounded-xl border border-blue-400 shadow-sm">
+              <div className="bg-white dark:bg-[#2E3440] p-2 rounded-xl border border-[#88C0D0] shadow-sm">
                 <input
                   type="text"
                   autoFocus
@@ -130,18 +130,18 @@ export const TaskBoard: React.FC<TaskBoardProps> = ({ project, tasks, sections }
                     if (e.key === 'Enter') handleQuickAddTask(undefined);
                     if (e.key === 'Escape') setActiveTaskInputSection(null);
                   }}
-                  className="w-full text-xs text-slate-800 dark:text-slate-100 bg-transparent outline-none"
+                  className="w-full text-xs text-slate-800 dark:text-[#ECEFF4] bg-transparent outline-none"
                 />
                 <div className="flex items-center justify-end gap-1.5 mt-2">
                   <button
                     onClick={() => setActiveTaskInputSection(null)}
-                    className="px-2 py-1 text-xs text-slate-500 hover:text-slate-700"
+                    className="px-2 py-1 text-xs text-slate-500 dark:text-[#D8DEE9] hover:text-slate-700"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={() => handleQuickAddTask(undefined)}
-                    className="px-2.5 py-1 text-xs bg-blue-600 text-white rounded-md font-medium"
+                    className="px-2.5 py-1 text-xs bg-[#5E81AC] text-white rounded-md font-medium"
                   >
                     Add
                   </button>
@@ -150,7 +150,7 @@ export const TaskBoard: React.FC<TaskBoardProps> = ({ project, tasks, sections }
             ) : (
               <button
                 onClick={() => setActiveTaskInputSection('no_section')}
-                className="w-full py-2 flex items-center justify-center gap-1 text-xs font-medium text-slate-500 hover:text-blue-600 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl transition-colors"
+                className="w-full py-2 flex items-center justify-center gap-1 text-xs font-medium text-slate-500 dark:text-[#D8DEE9] hover:text-[#5E81AC] dark:hover:text-[#88C0D0] hover:bg-slate-200/50 dark:hover:bg-[#434C5E] rounded-xl transition-colors"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Add Task</span>
@@ -169,22 +169,22 @@ export const TaskBoard: React.FC<TaskBoardProps> = ({ project, tasks, sections }
             key={section.id}
             onDragOver={handleDragOver}
             onDrop={(e) => handleDrop(e, section.id)}
-            className="w-72 sm:w-80 shrink-0 flex flex-col max-h-full rounded-2xl bg-slate-100/80 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/80 p-3"
+            className="w-72 sm:w-80 shrink-0 flex flex-col max-h-full rounded-2xl bg-slate-100/80 dark:bg-[#3B4252] border border-slate-200/80 dark:border-[#4C566A] p-3"
           >
             {/* Column Header */}
-            <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-200/60 dark:border-slate-800/60">
+            <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-200/60 dark:border-[#4C566A]">
               <div className="flex items-center gap-2 min-w-0">
-                <span className="font-semibold text-xs uppercase tracking-wider text-slate-700 dark:text-slate-300 truncate">
+                <span className="font-semibold text-xs uppercase tracking-wider text-slate-700 dark:text-[#ECEFF4] truncate">
                   {section.name}
                 </span>
-                <span className="text-xs px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-medium">
+                <span className="text-xs px-2 py-0.5 rounded-full bg-slate-200 dark:bg-[#434C5E] text-slate-600 dark:text-[#ECEFF4] font-medium">
                   {sectionTasks.length}
                 </span>
               </div>
               <div className="flex items-center gap-1">
                 <button
                   onClick={() => setActiveTaskInputSection(section.id)}
-                  className="p-1 rounded-md hover:bg-slate-200/60 dark:hover:bg-slate-800 text-slate-500 hover:text-blue-600 transition-colors"
+                  className="p-1 rounded-md hover:bg-slate-200/60 dark:hover:bg-[#434C5E] text-slate-500 dark:text-[#D8DEE9] hover:text-[#5E81AC] dark:hover:text-[#88C0D0] transition-colors"
                   title="Add task to section"
                 >
                   <Plus className="w-4 h-4" />
@@ -196,7 +196,7 @@ export const TaskBoard: React.FC<TaskBoardProps> = ({ project, tasks, sections }
                       updateSection(section.id, { name: newName.trim() });
                     }
                   }}
-                  className="p-1 rounded-md hover:bg-slate-200/60 dark:hover:bg-slate-800 text-slate-500 hover:text-slate-700 transition-colors"
+                  className="p-1 rounded-md hover:bg-slate-200/60 dark:hover:bg-[#434C5E] text-slate-500 dark:text-[#D8DEE9] hover:text-slate-700 dark:hover:text-[#ECEFF4] transition-colors"
                   title="Rename section"
                 >
                   <Edit2 className="w-3.5 h-3.5" />
@@ -207,7 +207,7 @@ export const TaskBoard: React.FC<TaskBoardProps> = ({ project, tasks, sections }
                       deleteSection(section.id);
                     }
                   }}
-                  className="p-1 rounded-md hover:bg-slate-200/60 dark:hover:bg-slate-800 text-slate-500 hover:text-red-600 transition-colors"
+                  className="p-1 rounded-md hover:bg-slate-200/60 dark:hover:bg-[#434C5E] text-slate-500 dark:text-[#D8DEE9] hover:text-[#BF616A] transition-colors"
                   title="Delete section"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
@@ -230,7 +230,7 @@ export const TaskBoard: React.FC<TaskBoardProps> = ({ project, tasks, sections }
 
               {/* Quick add in section */}
               {activeTaskInputSection === section.id ? (
-                <div className="bg-white dark:bg-slate-800 p-2 rounded-xl border border-blue-400 shadow-sm">
+                <div className="bg-white dark:bg-[#2E3440] p-2 rounded-xl border border-[#88C0D0] shadow-sm">
                   <input
                     type="text"
                     autoFocus
@@ -243,18 +243,18 @@ export const TaskBoard: React.FC<TaskBoardProps> = ({ project, tasks, sections }
                       if (e.key === 'Enter') handleQuickAddTask(section.id);
                       if (e.key === 'Escape') setActiveTaskInputSection(null);
                     }}
-                    className="w-full text-xs text-slate-800 dark:text-slate-100 bg-transparent outline-none"
+                    className="w-full text-xs text-slate-800 dark:text-[#ECEFF4] bg-transparent outline-none"
                   />
                   <div className="flex items-center justify-end gap-1.5 mt-2">
                     <button
                       onClick={() => setActiveTaskInputSection(null)}
-                      className="px-2 py-1 text-xs text-slate-500 hover:text-slate-700"
+                      className="px-2 py-1 text-xs text-slate-500 dark:text-[#D8DEE9] hover:text-slate-700"
                     >
                       Cancel
                     </button>
                     <button
                       onClick={() => handleQuickAddTask(section.id)}
-                      className="px-2.5 py-1 text-xs bg-blue-600 text-white rounded-md font-medium"
+                      className="px-2.5 py-1 text-xs bg-[#5E81AC] text-white rounded-md font-medium"
                     >
                       Add
                     </button>
@@ -263,7 +263,7 @@ export const TaskBoard: React.FC<TaskBoardProps> = ({ project, tasks, sections }
               ) : (
                 <button
                   onClick={() => setActiveTaskInputSection(section.id)}
-                  className="w-full py-2 flex items-center justify-center gap-1 text-xs font-medium text-slate-500 hover:text-blue-600 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl transition-colors"
+                  className="w-full py-2 flex items-center justify-center gap-1 text-xs font-medium text-slate-500 dark:text-[#D8DEE9] hover:text-[#5E81AC] dark:hover:text-[#88C0D0] hover:bg-slate-200/50 dark:hover:bg-[#434C5E] rounded-xl transition-colors"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   <span>Add Task</span>
@@ -279,7 +279,7 @@ export const TaskBoard: React.FC<TaskBoardProps> = ({ project, tasks, sections }
         {isAddingSection ? (
           <form
             onSubmit={handleCreateSection}
-            className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 shadow-xs"
+            className="rounded-2xl bg-white dark:bg-[#3B4252] border border-slate-200 dark:border-[#4C566A] p-3 shadow-xs"
           >
             <input
               type="text"
@@ -287,7 +287,7 @@ export const TaskBoard: React.FC<TaskBoardProps> = ({ project, tasks, sections }
               placeholder="Section name..."
               value={newSectionName}
               onChange={(e) => setNewSectionName(e.target.value)}
-              className="w-full text-xs sm:text-sm px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-100 outline-none focus:border-blue-500"
+              className="w-full text-xs sm:text-sm px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-[#4C566A] bg-slate-50 dark:bg-[#2E3440] text-slate-800 dark:text-[#ECEFF4] outline-none focus:border-[#88C0D0]"
             />
             <div className="flex items-center justify-end gap-2 mt-2">
               <button
@@ -296,13 +296,13 @@ export const TaskBoard: React.FC<TaskBoardProps> = ({ project, tasks, sections }
                   setIsAddingSection(false);
                   setNewSectionName('');
                 }}
-                className="px-3 py-1 text-xs text-slate-600 dark:text-slate-400 hover:text-slate-800"
+                className="px-3 py-1 text-xs text-slate-600 dark:text-[#D8DEE9] hover:text-slate-800"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-3 py-1 text-xs bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg"
+                className="px-3 py-1 text-xs bg-[#5E81AC] hover:bg-[#81A1C1] text-white font-medium rounded-lg"
               >
                 Add Section
               </button>
@@ -311,7 +311,7 @@ export const TaskBoard: React.FC<TaskBoardProps> = ({ project, tasks, sections }
         ) : (
           <button
             onClick={() => setIsAddingSection(true)}
-            className="w-full py-3 px-4 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-800 text-slate-500 hover:text-blue-600 hover:border-blue-400 dark:hover:border-blue-600 flex items-center justify-center gap-2 text-xs sm:text-sm font-medium transition-colors"
+            className="w-full py-3 px-4 rounded-2xl border-2 border-dashed border-slate-200 dark:border-[#4C566A] text-slate-500 dark:text-[#D8DEE9] hover:text-[#5E81AC] dark:hover:text-[#88C0D0] hover:border-[#88C0D0] dark:hover:border-[#88C0D0] flex items-center justify-center gap-2 text-xs sm:text-sm font-medium transition-colors"
           >
             <Plus className="w-4 h-4" />
             <span>Add Section</span>

@@ -1,98 +1,9 @@
 import { CalendarFeed, CalendarEvent } from '../types/planify';
 import { generateId, getFormattedDate } from './store';
 
-export const INITIAL_CALENDAR_FEEDS: CalendarFeed[] = [
-  {
-    id: 'cal_android_system',
-    name: 'Android System Calendar',
-    color: '#00a884',
-    enabled: true,
-    type: 'android_system',
-    eventsCount: 2,
-  },
-  {
-    id: 'cal_personal',
-    name: 'Personal & Family',
-    color: '#3584e4',
-    enabled: true,
-    type: 'built_in',
-    eventsCount: 2,
-  },
-  {
-    id: 'cal_work',
-    name: 'Work Meetings & Syncs',
-    color: '#7b44e6',
-    enabled: true,
-    type: 'built_in',
-    eventsCount: 1,
-  },
-];
+export const INITIAL_CALENDAR_FEEDS: CalendarFeed[] = [];
 
-const today = getFormattedDate(0);
-const tomorrow = getFormattedDate(1);
-const dayAfter = getFormattedDate(2);
-
-export const INITIAL_CALENDAR_EVENTS: CalendarEvent[] = [
-  {
-    id: 'evt_android_1',
-    calendarId: 'cal_android_system',
-    title: 'Android System Calendar Event',
-    description: 'Synced from Android Device Calendar (CalendarContract)',
-    location: 'Synced via Android Calendar Provider',
-    startDate: today,
-    startTime: '09:00',
-    endDate: today,
-    endTime: '09:30',
-    isAllDay: false,
-  },
-  {
-    id: 'evt_android_2',
-    calendarId: 'cal_android_system',
-    title: 'Android System Reminder & Meeting',
-    description: 'Synced from Android Device Calendar',
-    location: 'Android System Feed',
-    startDate: tomorrow,
-    startTime: '11:00',
-    endDate: tomorrow,
-    endTime: '12:00',
-    isAllDay: false,
-  },
-  {
-    id: 'evt_1',
-    calendarId: 'cal_work',
-    title: 'Design Review & Architecture Standup',
-    description: 'Weekly team review of UI components and backend sync APIs',
-    location: 'Conference Room B / Video Call',
-    startDate: today,
-    startTime: '10:00',
-    endDate: today,
-    endTime: '11:00',
-    isAllDay: false,
-  },
-  {
-    id: 'evt_2',
-    calendarId: 'cal_personal',
-    title: 'Dentist Appointment',
-    description: 'Routine checkup and cleaning',
-    location: 'Dental Health Center',
-    startDate: today,
-    startTime: '15:30',
-    endDate: today,
-    endTime: '16:30',
-    isAllDay: false,
-  },
-  {
-    id: 'evt_4',
-    calendarId: 'cal_personal',
-    title: 'Family Dinner',
-    location: 'Bistro Riviera',
-    startDate: dayAfter,
-    startTime: '19:00',
-    endDate: dayAfter,
-    endTime: '21:00',
-    isAllDay: false,
-  },
-];
+export const INITIAL_CALENDAR_EVENTS: CalendarEvent[] = [];
 
 /**
  * Trigger Android System Calendar Sync
@@ -103,7 +14,6 @@ export async function syncAndroidSystemCalendar(): Promise<{
   eventsCount: number;
 }> {
   try {
-    // Check if running inside Android Webview Bridge
     const windowObj = window as unknown as {
       AndroidCalendar?: {
         getSystemEvents: () => string;
@@ -122,8 +32,8 @@ export async function syncAndroidSystemCalendar(): Promise<{
 
     return {
       success: true,
-      message: 'Android system calendar connected and synchronized.',
-      eventsCount: 2,
+      message: 'Android system calendar connected.',
+      eventsCount: 0,
     };
   } catch (err: unknown) {
     const errMsg = err instanceof Error ? err.message : String(err);
@@ -135,12 +45,39 @@ export async function syncAndroidSystemCalendar(): Promise<{
   }
 }
 
+function decodeXmlEntities(str: string): string {
+  return str
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&#13;/g, '\r')
+    .replace(/&#10;/g, '\n')
+    .replace(/&amp;/g, '&');
+}
+
+function unfoldIcsLines(icsString: string): string[] {
+  const decoded = decodeXmlEntities(icsString);
+  const rawLines = decoded.split(/\r?\n/);
+  const unfolded: string[] = [];
+
+  for (const rawLine of rawLines) {
+    if ((rawLine.startsWith(' ') || rawLine.startsWith('\t')) && unfolded.length > 0) {
+      unfolded[unfolded.length - 1] += rawLine.substring(1);
+    } else {
+      unfolded.push(rawLine);
+    }
+  }
+
+  return unfolded;
+}
+
 /**
  * Parses basic iCalendar (.ics) format string into CalendarEvent objects
  */
 export function parseIcsContent(icsString: string, calendarId: string): CalendarEvent[] {
   const events: CalendarEvent[] = [];
-  const lines = icsString.split(/\r?\n/);
+  const lines = unfoldIcsLines(icsString);
 
   let currentEvent: Partial<CalendarEvent> | null = null;
 
@@ -164,11 +101,11 @@ export function parseIcsContent(icsString: string, calendarId: string): Calendar
       currentEvent = null;
     } else if (currentEvent) {
       if (line.startsWith('SUMMARY:')) {
-        currentEvent.title = line.replace('SUMMARY:', '').trim();
+        currentEvent.title = line.substring(8).trim();
       } else if (line.startsWith('DESCRIPTION:')) {
-        currentEvent.description = line.replace('DESCRIPTION:', '').trim();
+        currentEvent.description = line.substring(12).trim();
       } else if (line.startsWith('LOCATION:')) {
-        currentEvent.location = line.replace('LOCATION:', '').trim();
+        currentEvent.location = line.substring(9).trim();
       } else if (line.startsWith('DTSTART')) {
         const value = line.split(':')[1] || '';
         if (value.includes('T')) {

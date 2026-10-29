@@ -55,8 +55,8 @@ export const TaskRow: React.FC<TaskRowProps> = ({ task, showProjectBadge = true 
       onClick={() => setSelectedTaskId(task.id)}
       className={`group relative flex items-start gap-3 p-3 rounded-xl border transition-all cursor-pointer select-none ${
         task.completed
-          ? 'bg-slate-50/60 dark:bg-slate-900/30 border-slate-200/50 dark:border-slate-800/50 opacity-60'
-          : 'bg-white dark:bg-slate-850 border-slate-200 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-500 shadow-2xs hover:shadow-xs'
+          ? 'bg-slate-50/60 dark:bg-[#2E3440]/60 border-slate-200/50 dark:border-[#4C566A]/50 opacity-60'
+          : 'bg-white dark:bg-[#3B4252] border-slate-200 dark:border-[#4C566A] hover:border-[#88C0D0] dark:hover:border-[#88C0D0] shadow-2xs hover:shadow-xs'
       }`}
     >
       {/* Checkbox with priority indicator */}
@@ -68,7 +68,7 @@ export const TaskRow: React.FC<TaskRowProps> = ({ task, showProjectBadge = true 
         }}
         className={`w-5 h-5 mt-0.5 rounded-full border-2 flex items-center justify-center transition-all shrink-0 ${
           task.completed
-            ? 'bg-slate-400 border-slate-400 text-white dark:bg-slate-600 dark:border-slate-600'
+            ? 'bg-slate-400 border-slate-400 text-white dark:bg-[#4C566A] dark:border-[#4C566A]'
             : 'hover:opacity-80'
         }`}
         style={
@@ -90,21 +90,21 @@ export const TaskRow: React.FC<TaskRowProps> = ({ task, showProjectBadge = true 
           <span
             className={`text-sm leading-snug break-words ${
               task.completed
-                ? 'line-through text-slate-400 dark:text-slate-500 font-normal'
-                : 'text-slate-850 dark:text-slate-100 font-medium'
+                ? 'line-through text-slate-400 dark:text-[#D8DEE9]/60 font-normal'
+                : 'text-slate-850 dark:text-[#ECEFF4] font-medium'
             }`}
           >
             {task.content}
           </span>
 
           {task.is_pinned && (
-            <Pin className="w-3.5 h-3.5 text-rose-500 fill-rose-500 shrink-0" />
+            <Pin className="w-3.5 h-3.5 text-[#BF616A] fill-[#BF616A] shrink-0" />
           )}
         </div>
 
         {/* Task Description Preview */}
         {task.description && (
-          <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5 font-normal">
+          <p className="text-xs text-slate-500 dark:text-[#D8DEE9] line-clamp-1 mt-0.5 font-normal">
             {task.description}
           </p>
         )}
@@ -116,10 +116,10 @@ export const TaskRow: React.FC<TaskRowProps> = ({ task, showProjectBadge = true 
             <span
               className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md font-medium text-[11px] ${
                 isOverdue
-                  ? 'bg-red-50 text-red-600 dark:bg-red-950/40 dark:text-red-400'
+                  ? 'bg-red-50 text-[#BF616A] dark:bg-[#BF616A]/20 dark:text-[#BF616A]'
                   : isToday
-                  ? 'bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400'
-                  : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300'
+                  ? 'bg-amber-50 text-[#D08770] dark:bg-[#D08770]/20 dark:text-[#EBCB8B]'
+                  : 'bg-slate-100 text-slate-600 dark:bg-[#434C5E] dark:text-[#ECEFF4]'
               }`}
             >
               <Calendar className="w-3 h-3" />
@@ -136,7 +136,7 @@ export const TaskRow: React.FC<TaskRowProps> = ({ task, showProjectBadge = true 
 
           {/* Project & Section Badge */}
           {showProjectBadge && project && (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[11px]">
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-100 dark:bg-[#434C5E] text-slate-600 dark:text-[#ECEFF4] text-[11px]">
               <span
                 className="w-1.5 h-1.5 rounded-full"
                 style={{ backgroundColor: project.color }}
@@ -160,7 +160,7 @@ export const TaskRow: React.FC<TaskRowProps> = ({ task, showProjectBadge = true 
                 key={lbl.id}
                 className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-medium"
                 style={{
-                  backgroundColor: `${lbl.color}15`,
+                  backgroundColor: `${lbl.color}25`,
                   color: lbl.color,
                 }}
               >
@@ -171,7 +171,7 @@ export const TaskRow: React.FC<TaskRowProps> = ({ task, showProjectBadge = true 
 
           {/* Subtasks Count */}
           {totalSubtasks > 0 && (
-            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800">
+            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] text-slate-500 dark:text-[#D8DEE9] bg-slate-100 dark:bg-[#434C5E]">
               <CheckSquare className="w-3 h-3" />
               <span>
                 {completedSubtasks}/{totalSubtasks}
@@ -182,7 +182,7 @@ export const TaskRow: React.FC<TaskRowProps> = ({ task, showProjectBadge = true 
           {/* Attachments */}
           {task.attachments.length > 0 && (
             <span
-              className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800"
+              className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] text-slate-500 dark:text-[#D8DEE9] bg-slate-100 dark:bg-[#434C5E]"
               title={`${task.attachments.length} attachments`}
             >
               <Paperclip className="w-3 h-3" />
@@ -211,8 +211,8 @@ export const TaskRow: React.FC<TaskRowProps> = ({ task, showProjectBadge = true 
             e.stopPropagation();
             toggleTaskPin(task.id);
           }}
-          className={`p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-750 transition-colors ${
-            task.is_pinned ? 'text-rose-500' : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-200'
+          className={`p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-[#434C5E] transition-colors ${
+            task.is_pinned ? 'text-[#BF616A]' : 'text-slate-400 dark:text-[#D8DEE9] hover:text-slate-600 dark:hover:text-[#ECEFF4]'
           }`}
           title={task.is_pinned ? 'Unpin' : 'Pin to Pinboard'}
         >
@@ -225,7 +225,7 @@ export const TaskRow: React.FC<TaskRowProps> = ({ task, showProjectBadge = true 
             e.stopPropagation();
             setSelectedTaskId(task.id);
           }}
-          className="p-1.5 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-slate-100 dark:hover:bg-slate-750 transition-colors"
+          className="p-1.5 rounded-lg text-slate-400 dark:text-[#D8DEE9] hover:text-[#5E81AC] dark:hover:text-[#88C0D0] hover:bg-slate-100 dark:hover:bg-[#434C5E] transition-colors"
           title="Edit Task"
         >
           <Edit2 className="w-3.5 h-3.5" />
@@ -237,7 +237,7 @@ export const TaskRow: React.FC<TaskRowProps> = ({ task, showProjectBadge = true 
             e.stopPropagation();
             deleteTask(task.id);
           }}
-          className="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-slate-100 dark:hover:bg-slate-750 transition-colors"
+          className="p-1.5 rounded-lg text-slate-400 dark:text-[#D8DEE9] hover:text-[#BF616A] dark:hover:text-[#BF616A] hover:bg-slate-100 dark:hover:bg-[#434C5E] transition-colors"
           title="Delete Task"
         >
           <Trash2 className="w-3.5 h-3.5" />

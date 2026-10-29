@@ -4,30 +4,154 @@
 
 @layer base {
   :root {
-    --accent-color: #3584e4;
-    --accent-hover: #226ec7;
+    --accent-color: #2563eb;
+    --accent-hover: #1d4ed8;
+    --bg-page: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-surface: #f1f5f9;
+    --bg-hover: #e2e8f0;
+    --border-main: #e2e8f0;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --input-bg: #ffffff;
+    --input-border: #cbd5e1;
+    --overlay-bg: rgba(0, 0, 0, 0.4);
+  }
+
+  /* Neutral Dark Mode (Slate) */
+  html.dark,
+  html[data-appearance="dark"] {
+    color-scheme: dark;
+    --bg-page: #0f172a;
+    --bg-card: #1e293b;
+    --bg-surface: #334155;
+    --bg-hover: #475569;
+    --border-main: #334155;
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --input-bg: #0f172a;
+    --input-border: #475569;
+    --overlay-bg: rgba(0, 0, 0, 0.75);
+  }
+
+  /* Nord Color Palette Mode (Dark Blue / Nord) */
+  html[data-appearance="dark-blue"] {
+    color-scheme: dark;
+    --bg-page: #2e3440;      /* Nord0: Polar Night Base */
+    --bg-card: #3b4252;      /* Nord1: Polar Night Container */
+    --bg-surface: #434c5e;   /* Nord2: Polar Night Surface */
+    --bg-hover: #4c566a;     /* Nord3: Polar Night Highlight */
+    --border-main: #4c566a;
+    --text-primary: #eceff4;   /* Nord6: Snow Storm Bright */
+    --text-secondary: #e5e9f0; /* Nord5: Snow Storm Main */
+    --text-muted: #d8dee9;     /* Nord4: Snow Storm Muted */
+    --input-bg: #2e3440;
+    --input-border: #4c566a;
+    --overlay-bg: rgba(22, 26, 33, 0.85);
   }
 }
 
-/* Theme styling */
-html {
+/* Base Body Styling */
+body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
   transition: background-color 0.2s ease, color 0.2s ease;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
-html.dark,
-html[data-appearance="dark"] {
-  color-scheme: dark;
-  background-color: #1e1e24;
-  color: #f3f4f6;
+/* Comprehensive Nord Theme Overrides (html[data-appearance="dark-blue"]) */
+html[data-appearance="dark-blue"] .bg-slate-50,
+html[data-appearance="dark-blue"] .bg-slate-950,
+html[data-appearance="dark-blue"] .bg-slate-900\/60,
+html[data-appearance="dark-blue"] .bg-slate-950\/80 {
+  background-color: #2e3440 !important;
 }
 
-html[data-appearance="dark-blue"] {
-  color-scheme: dark;
-  background-color: #171d26;
-  color: #f1f5f9;
+html[data-appearance="dark-blue"] .bg-white,
+html[data-appearance="dark-blue"] .bg-slate-900,
+html[data-appearance="dark-blue"] .bg-slate-850,
+html[data-appearance="dark-blue"] .bg-slate-800 {
+  background-color: #3b4252 !important;
 }
 
-/* Custom scrollbars */
+html[data-appearance="dark-blue"] .bg-slate-100,
+html[data-appearance="dark-blue"] .bg-slate-800\/80,
+html[data-appearance="dark-blue"] .bg-slate-700 {
+  background-color: #434c5e !important;
+}
+
+html[data-appearance="dark-blue"] .hover\:bg-slate-100:hover,
+html[data-appearance="dark-blue"] .hover\:bg-slate-800:hover,
+html[data-appearance="dark-blue"] .hover\:bg-slate-900:hover,
+html[data-appearance="dark-blue"] .hover\:bg-slate-700:hover {
+  background-color: #4c566a !important;
+}
+
+html[data-appearance="dark-blue"] .border-slate-100,
+html[data-appearance="dark-blue"] .border-slate-200,
+html[data-appearance="dark-blue"] .border-slate-700,
+html[data-appearance="dark-blue"] .border-slate-800,
+html[data-appearance="dark-blue"] .border-slate-900 {
+  border-color: #4c566a !important;
+}
+
+html[data-appearance="dark-blue"] .text-slate-900,
+html[data-appearance="dark-blue"] .text-slate-800,
+html[data-appearance="dark-blue"] .text-slate-700,
+html[data-appearance="dark-blue"] .text-slate-100,
+html[data-appearance="dark-blue"] .text-white {
+  color: #eceff4 !important;
+}
+
+html[data-appearance="dark-blue"] .text-slate-600,
+html[data-appearance="dark-blue"] .text-slate-500,
+html[data-appearance="dark-blue"] .text-slate-400 {
+  color: #d8dee9 !important;
+}
+
+html[data-appearance="dark-blue"] input,
+html[data-appearance="dark-blue"] textarea,
+html[data-appearance="dark-blue"] select {
+  background-color: #2e3440 !important;
+  color: #eceff4 !important;
+  border-color: #4c566a !important;
+}
+
+html[data-appearance="dark-blue"] input::placeholder,
+html[data-appearance="dark-blue"] textarea::placeholder {
+  color: #d8dee9 !important;
+  opacity: 0.7;
+}
+
+/* Nord Nord Frost Accents */
+html[data-appearance="dark-blue"] .bg-blue-600 {
+  background-color: #88c0d0 !important;
+  color: #2e3440 !important;
+}
+
+html[data-appearance="dark-blue"] .hover\:bg-blue-700:hover {
+  background-color: #81a1c1 !important;
+}
+
+html[data-appearance="dark-blue"] .text-blue-600,
+html[data-appearance="dark-blue"] .text-blue-500,
+html[data-appearance="dark-blue"] .text-blue-400 {
+  color: #88c0d0 !important;
+}
+
+html[data-appearance="dark-blue"] .bg-purple-600 {
+  background-color: #b48ead !important;
+  color: #2e3440 !important;
+}
+
+html[data-appearance="dark-blue"] .text-purple-600,
+html[data-appearance="dark-blue"] .text-purple-400 {
+  color: #b48ead !important;
+}
+
+/* Custom Scrollbars for Dark & Nord Modes */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -44,4 +168,13 @@ html[data-appearance="dark-blue"] {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(156, 163, 175, 0.6);
+}
+
+html.dark ::-webkit-scrollbar-thumb,
+html[data-appearance="dark"] ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+html[data-appearance="dark-blue"] ::-webkit-scrollbar-thumb {
+  background: #4c566a;
 }

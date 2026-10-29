@@ -22,10 +22,10 @@ import {
   STORAGE_KEY,
 } from '../services/store';
 import {
-  NextcloudConfig,
-  syncNextcloudDeck,
-  testNextcloudConnection,
-} from '../services/nextcloud';
+  CaldavConfig,
+  syncCaldav,
+  testCaldavConnection,
+} from '../services/caldav';
 import { parseIcsContent } from '../services/calendar';
 
 interface PlanifyContextType {
@@ -39,8 +39,8 @@ interface PlanifyContextType {
   appearance: AppearanceMode;
   dailyGoal: number;
   soundEnabled: boolean;
-  nextcloud: NextcloudConfig;
-  isSyncingNextcloud: boolean;
+  caldav: CaldavConfig;
+  isSyncingCaldav: boolean;
   activeView: ActiveView;
   searchQuery: string;
   selectedTaskId: string | null;
@@ -64,8 +64,8 @@ interface PlanifyContextType {
   setAppearance: (mode: AppearanceMode) => void;
   setDailyGoal: (goal: number) => void;
   setSoundEnabled: (enabled: boolean) => void;
-  setNextcloudConfig: (config: Partial<NextcloudConfig>) => void;
-  syncNextcloudNow: () => Promise<{ success: boolean; message: string }>;
+  setCaldavConfig: (config: Partial<CaldavConfig>) => void;
+  syncCaldavNow: () => Promise<{ success: boolean; message: string }>;
 
   // Calendar actions
   toggleCalendarFeed: (id: string) => void;
@@ -133,7 +133,7 @@ export const PlanifyProvider: React.FC<{ children: ReactNode }> = ({ children })
   const [isNewProjectOpen, setIsNewProjectOpen] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [isSyncingNextcloud, setIsSyncingNextcloud] = useState(false);
+  const [isSyncingCaldav, setIsSyncingCaldav] = useState(false);
 
   useEffect(() => {
     saveState(state);
@@ -261,55 +261,76 @@ export const PlanifyProvider: React.FC<{ children: ReactNode }> = ({ children })
     setState((prev) => ({ ...prev, soundEnabled }));
   };
 
-  const setNextcloudConfig = (config: Partial<NextcloudConfig>) => {
+  const setCaldavConfig = (config: Partial<CaldavConfig>) => {
     setState((prev) => ({
       ...prev,
-      nextcloud: { ...prev.nextcloud, ...config },
+      caldav: { ...prev.caldav, ...config },
     }));
   };
 
-  const syncNextcloudNow = async (): Promise<{ success: boolean; message: string }> => {
-    if (!state.nextcloud.enabled || !state.nextcloud.serverUrl) {
-      return { success: false, message: 'Nextcloud sync is not configured or enabled.' };
+  const syncCaldavNow = async (): Promise<{ success: boolean; message: string }> => {
+    if (!state.caldav.enabled || !state.caldav.serverUrl) {
+      return { success: false, message: 'CalDAV sync is not configured or enabled.' };
     }
 
-    setIsSyncingNextcloud(true);
+    setIsSyncingCaldav(true);
     try {
-      const testRes = await testNextcloudConnection(state.nextcloud);
+      const testRes = await testCaldavConnection(state.caldav);
       if (!testRes.success) {
-        setIsSyncingNextcloud(false);
+        setIsSyncingCaldav(false);
         return { success: false, message: testRes.message };
       }
 
-      const syncRes = await syncNextcloudDeck(
-        state.nextcloud,
+      const syncRes = await syncCaldav(
+        state.caldav,
         state.projects,
-        state.sections,
-        state.items
+        state.items,
+        state.calendarEvents
       );
 
       setState((prev) => ({
         ...prev,
-        projects: syncRes.projects,
-        sections: syncRes.sections,
         items: syncRes.items,
-        nextcloud: {
-          ...prev.nextcloud,
+        calendarEvents: syncRes.events,
+        caldav: {
+          ...prev.caldav,
           lastSyncedAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         },
       }));
 
-      setIsSyncingNextcloud(false);
+      setIsSyncingCaldav(false);
       return {
         success: true,
-        message: `Nextcloud sync completed! Imported ${syncRes.syncedCount} new item(s).`,
+        message: `CalDAV sync completed! Synced ${syncRes.syncedCount} new item(s).`,
       };
     } catch (e: unknown) {
-      setIsSyncingNextcloud(false);
+      setIsSyncingCaldav(false);
       const errMsg = e instanceof Error ? e.message : String(e);
-      return { success: false, message: `Sync error: ${errMsg}` };
+      return { success: false, message: `CalDAV error: ${errMsg}` };
     }
   };
+
+  // Background Auto-Sync Timer for GNOME & Android CalDAV Accounts
+  useEffect(() => {
+    if (!state.caldav.enabled || !state.caldav.autoSync || !state.caldav.serverUrl) {
+      return;
+    }
+
+    // Perform an initial sync on mount or configuration enable
+    syncCaldavNow();
+
+    const intervalMs = Math.max(1, state.caldav.autoSyncIntervalMinutes || 15) * 60 * 1000;
+    const timer = setInterval(() => {
+      syncCaldavNow();
+    }, intervalMs);
+
+    return () => clearInterval(timer);
+  }, [
+    state.caldav.enabled,
+    state.caldav.autoSync,
+    state.caldav.autoSyncIntervalMinutes,
+    state.caldav.serverUrl,
+  ]);
 
   const getProjectById = (id: string) => state.projects.find((p) => p.id === id);
   const getSectionById = (id: string) => state.sections.find((s) => s.id === id);
@@ -726,7 +747,7 @@ export const PlanifyProvider: React.FC<{ children: ReactNode }> = ({ children })
           appearance: data.appearance || 'light',
           dailyGoal: data.dailyGoal || 5,
           soundEnabled: data.soundEnabled ?? true,
-          nextcloud: data.nextcloud || state.nextcloud,
+          caldav: data.caldav || state.caldav,
         });
         return true;
       }
@@ -752,8 +773,8 @@ export const PlanifyProvider: React.FC<{ children: ReactNode }> = ({ children })
       appearance: state.appearance,
       dailyGoal: state.dailyGoal,
       soundEnabled: state.soundEnabled,
-      nextcloud: state.nextcloud,
-      isSyncingNextcloud,
+      caldav: state.caldav,
+      isSyncingCaldav,
       activeView,
       searchQuery,
       selectedTaskId,
@@ -775,8 +796,8 @@ export const PlanifyProvider: React.FC<{ children: ReactNode }> = ({ children })
       setAppearance,
       setDailyGoal,
       setSoundEnabled,
-      setNextcloudConfig,
-      syncNextcloudNow,
+      setCaldavConfig,
+      syncCaldavNow,
       toggleCalendarFeed,
       addCalendarFeed,
       importIcsEvents,
@@ -818,7 +839,7 @@ export const PlanifyProvider: React.FC<{ children: ReactNode }> = ({ children })
       importBackupJSON,
       resetToDefaults,
     }),
-    [state, activeView, searchQuery, selectedTaskId, isQuickAddOpen, isProductivityOpen, isSettingsOpen, isNewProjectOpen, editingProject, sidebarOpen, isSyncingNextcloud]
+    [state, activeView, searchQuery, selectedTaskId, isQuickAddOpen, isProductivityOpen, isSettingsOpen, isNewProjectOpen, editingProject, sidebarOpen, isSyncingCaldav]
   );
 
   return <PlanifyContext.Provider value={contextValue}>{children}</PlanifyContext.Provider>;

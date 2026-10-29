@@ -12,6 +12,7 @@ import {
   Settings,
   X,
   RefreshCw,
+  Calendar,
 } from 'lucide-react';
 import { usePlanify } from '../context/PlanifyContext';
 import { ProjectIcon } from './ProjectIcon';
@@ -31,9 +32,9 @@ export const HeaderBar: React.FC = () => {
     setProjectViewMode,
     appearance,
     setAppearance,
-    nextcloud,
-    isSyncingNextcloud,
-    syncNextcloudNow,
+    caldav,
+    isSyncingCaldav,
+    syncCaldavNow,
   } = usePlanify();
 
   let currentTitle = 'Tasks';
@@ -145,27 +146,6 @@ export const HeaderBar: React.FC = () => {
 
       {/* Right: Actions */}
       <div className="flex items-center gap-1 sm:gap-2">
-        {nextcloud.enabled && (
-          <button
-            onClick={() => syncNextcloudNow()}
-            disabled={isSyncingNextcloud}
-            className="p-2 rounded-lg text-cyan-600 dark:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors disabled:opacity-50"
-            title={isSyncingNextcloud ? 'Syncing...' : 'Sync with Nextcloud'}
-          >
-            <RefreshCw className={`w-4 h-4 ${isSyncingNextcloud ? 'animate-spin' : ''}`} />
-          </button>
-        )}
-
-        {/* Quick Add Task Button */}
-        <button
-          onClick={() => setIsQuickAddOpen(true)}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs sm:text-sm shadow-xs transition-colors"
-          title="Quick Add Task (shortcut: q)"
-        >
-          <Plus className="w-4 h-4" />
-          <span className="hidden sm:inline">Add Task</span>
-        </button>
-
         {/* Productivity Report */}
         <button
           onClick={() => setIsProductivityOpen(true)}
@@ -179,7 +159,7 @@ export const HeaderBar: React.FC = () => {
         <button
           onClick={cycleAppearance}
           className="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-          title={`Appearance: ${appearance} (Click to toggle)`}
+          title={`Appearance: ${appearance === 'dark-blue' ? 'Nord Blue' : appearance}`}
         >
           {appearance === 'light' && <Sun className="w-4 h-4 text-amber-500" />}
           {appearance === 'dark' && <Moon className="w-4 h-4 text-blue-400" />}
@@ -190,7 +170,7 @@ export const HeaderBar: React.FC = () => {
         <button
           onClick={() => setIsSettingsOpen(true)}
           className="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-          title="Settings & Calendars"
+          title="Settings & Accounts Sync"
         >
           <Settings className="w-4 h-4" />
         </button>

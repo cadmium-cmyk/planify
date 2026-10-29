@@ -18,7 +18,6 @@ import {
   Edit2,
   Trash2,
   Sparkles,
-  Cloud,
   RefreshCw,
 } from 'lucide-react';
 import { usePlanify } from '../context/PlanifyContext';
@@ -39,9 +38,9 @@ export const Sidebar: React.FC = () => {
     toggleProjectFavorite,
     items,
     dailyGoal,
-    nextcloud,
-    isSyncingNextcloud,
-    syncNextcloudNow,
+    caldav,
+    isSyncingCaldav,
+    syncCaldavNow,
   } = usePlanify();
 
   const [moreFiltersOpen, setMoreFiltersOpen] = useState(false);
@@ -56,27 +55,27 @@ export const Sidebar: React.FC = () => {
   const progressPercent = Math.min(Math.round((completedTodayCount / dailyGoal) * 100), 100);
 
   const mainFilters: { id: FilterId; label: string; icon: React.ReactNode }[] = [
-    { id: 'inbox', label: 'Inbox', icon: <Inbox className="w-4 h-4 text-blue-500" /> },
-    { id: 'today', label: 'Today', icon: <Calendar className="w-4 h-4 text-emerald-500" /> },
-    { id: 'scheduled', label: 'Scheduled', icon: <CalendarDays className="w-4 h-4 text-purple-500" /> },
-    { id: 'labels', label: 'Labels', icon: <Tag className="w-4 h-4 text-amber-500" /> },
-    { id: 'pinboard', label: 'Pinboard', icon: <Pin className="w-4 h-4 text-rose-500" /> },
-    { id: 'completed', label: 'Completed', icon: <CheckCircle2 className="w-4 h-4 text-slate-500" /> },
+    { id: 'inbox', label: 'Inbox', icon: <Inbox className="w-4 h-4 text-[#88C0D0]" /> },
+    { id: 'today', label: 'Today', icon: <Calendar className="w-4 h-4 text-[#A3BE8C]" /> },
+    { id: 'scheduled', label: 'Scheduled', icon: <CalendarDays className="w-4 h-4 text-[#B48EAD]" /> },
+    { id: 'labels', label: 'Labels', icon: <Tag className="w-4 h-4 text-[#EBCB8B]" /> },
+    { id: 'pinboard', label: 'Pinboard', icon: <Pin className="w-4 h-4 text-[#BF616A]" /> },
+    { id: 'completed', label: 'Completed', icon: <CheckCircle2 className="w-4 h-4 text-slate-500 dark:text-[#D8DEE9]" /> },
   ];
 
   const secondaryFilters: { id: FilterId; label: string; icon: React.ReactNode }[] = [
-    { id: 'tomorrow', label: 'Tomorrow', icon: <Clock className="w-4 h-4 text-cyan-500" /> },
-    { id: 'anytime', label: 'Anytime', icon: <Layers className="w-4 h-4 text-indigo-500" /> },
-    { id: 'repeating', label: 'Repeating', icon: <Repeat className="w-4 h-4 text-teal-500" /> },
-    { id: 'unlabeled', label: 'Unlabeled', icon: <FileQuestion className="w-4 h-4 text-stone-500" /> },
-    { id: 'all', label: 'All Tasks', icon: <Layers className="w-4 h-4 text-slate-400" /> },
+    { id: 'tomorrow', label: 'Tomorrow', icon: <Clock className="w-4 h-4 text-[#8FBCBB]" /> },
+    { id: 'anytime', label: 'Anytime', icon: <Layers className="w-4 h-4 text-[#81A1C1]" /> },
+    { id: 'repeating', label: 'Repeating', icon: <Repeat className="w-4 h-4 text-[#8FBCBB]" /> },
+    { id: 'unlabeled', label: 'Unlabeled', icon: <FileQuestion className="w-4 h-4 text-[#D8DEE9]" /> },
+    { id: 'all', label: 'All Tasks', icon: <Layers className="w-4 h-4 text-slate-400 dark:text-[#D8DEE9]" /> },
   ];
 
   const favoriteProjects = projects.filter((p) => p.is_favorite && !p.is_inbox);
   const regularProjects = projects.filter((p) => !p.is_inbox);
 
   return (
-    <aside className="w-64 sm:w-72 h-full border-r border-slate-200 dark:border-slate-800 bg-slate-50/90 dark:bg-slate-900/90 flex flex-col shrink-0 select-none overflow-y-auto">
+    <aside className="w-64 sm:w-72 h-full border-r border-slate-200 dark:border-[#4C566A] bg-slate-50/90 dark:bg-[#2E3440] flex flex-col shrink-0 select-none overflow-y-auto transition-colors">
       <div className="p-2 pt-3" />
 
       {/* Main Navigation Filters */}
@@ -91,8 +90,8 @@ export const Sidebar: React.FC = () => {
               onClick={() => setActiveView({ type: 'filter', id: filter.id })}
               className={`w-full flex items-center justify-between px-3 py-1.5 rounded-lg text-sm transition-colors ${
                 isActive
-                  ? 'bg-blue-600/10 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400 font-medium'
-                  : 'text-slate-700 dark:text-slate-300 hover:bg-slate-200/60 dark:hover:bg-slate-800/60'
+                  ? 'bg-[#5E81AC]/15 text-[#5E81AC] dark:bg-[#88C0D0]/20 dark:text-[#88C0D0] font-semibold'
+                  : 'text-slate-700 dark:text-[#D8DEE9] hover:bg-slate-200/60 dark:hover:bg-[#3B4252]'
               }`}
             >
               <div className="flex items-center gap-2.5 min-w-0">
@@ -104,8 +103,8 @@ export const Sidebar: React.FC = () => {
                   <span
                     className={`text-xs px-2 py-0.5 rounded-full font-medium ${
                       isActive
-                        ? 'bg-blue-600 text-white dark:bg-blue-500'
-                        : 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
+                        ? 'bg-[#5E81AC] text-white dark:bg-[#88C0D0] dark:text-[#2E3440]'
+                        : 'bg-slate-200 dark:bg-[#434C5E] text-slate-600 dark:text-[#E5E9F0]'
                     }`}
                   >
                     {count}
@@ -120,7 +119,7 @@ export const Sidebar: React.FC = () => {
         <div>
           <button
             onClick={() => setMoreFiltersOpen(!moreFiltersOpen)}
-            className="w-full flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 transition-colors"
+            className="w-full flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium text-slate-500 hover:text-slate-700 dark:text-[#D8DEE9] dark:hover:text-[#ECEFF4] transition-colors"
           >
             <span className="flex items-center gap-1.5">
               {moreFiltersOpen ? (
@@ -143,8 +142,8 @@ export const Sidebar: React.FC = () => {
                     onClick={() => setActiveView({ type: 'filter', id: filter.id })}
                     className={`w-full flex items-center justify-between px-3 py-1 rounded-lg text-xs transition-colors ${
                       isActive
-                        ? 'bg-blue-600/10 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400 font-medium'
-                        : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200/60 dark:hover:bg-slate-800/60'
+                        ? 'bg-[#5E81AC]/15 text-[#5E81AC] dark:bg-[#88C0D0]/20 dark:text-[#88C0D0] font-semibold'
+                        : 'text-slate-600 dark:text-[#D8DEE9] hover:bg-slate-200/60 dark:hover:bg-[#3B4252]'
                     }`}
                   >
                     <div className="flex items-center gap-2 truncate">
@@ -152,7 +151,7 @@ export const Sidebar: React.FC = () => {
                       <span className="truncate">{filter.label}</span>
                     </div>
                     {count > 0 && (
-                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-200 dark:bg-[#434C5E] text-slate-600 dark:text-[#ECEFF4]">
                         {count}
                       </span>
                     )}
@@ -164,13 +163,13 @@ export const Sidebar: React.FC = () => {
         </div>
       </div>
 
-      <div className="h-px bg-slate-200/80 dark:bg-slate-800/80 mx-3 my-1" />
+      <div className="h-px bg-slate-200/80 dark:bg-[#4C566A] mx-3 my-1" />
 
       {/* Favorites Section */}
       {favoriteProjects.length > 0 && (
         <div className="px-2 py-1">
-          <div className="px-3 py-1 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-            <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
+          <div className="px-3 py-1 text-xs font-semibold text-slate-500 dark:text-[#D8DEE9] uppercase tracking-wider flex items-center gap-1.5">
+            <Star className="w-3 h-3 text-[#EBCB8B] fill-[#EBCB8B]" />
             <span>Favorites</span>
           </div>
           <div className="space-y-0.5">
@@ -183,8 +182,8 @@ export const Sidebar: React.FC = () => {
                   onClick={() => setActiveView({ type: 'project', id: project.id })}
                   className={`w-full flex items-center justify-between px-3 py-1.5 rounded-lg text-sm transition-colors ${
                     isActive
-                      ? 'bg-blue-600/10 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400 font-medium'
-                      : 'text-slate-700 dark:text-slate-300 hover:bg-slate-200/60 dark:hover:bg-slate-800/60'
+                      ? 'bg-[#5E81AC]/15 text-[#5E81AC] dark:bg-[#88C0D0]/20 dark:text-[#88C0D0] font-semibold'
+                      : 'text-slate-700 dark:text-[#ECEFF4] hover:bg-slate-200/60 dark:hover:bg-[#3B4252]'
                   }`}
                 >
                   <div className="flex items-center gap-2 truncate">
@@ -192,7 +191,7 @@ export const Sidebar: React.FC = () => {
                     <span className="truncate">{project.name}</span>
                   </div>
                   {count > 0 && (
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-slate-200 dark:bg-[#434C5E] text-slate-600 dark:text-[#ECEFF4]">
                       {count}
                     </span>
                   )}
@@ -206,12 +205,12 @@ export const Sidebar: React.FC = () => {
       {/* Projects Section */}
       <div className="px-2 py-1 flex-1">
         <div className="px-3 py-1 flex items-center justify-between">
-          <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+          <span className="text-xs font-semibold text-slate-500 dark:text-[#D8DEE9] uppercase tracking-wider">
             Projects
           </span>
           <button
             onClick={() => setIsNewProjectOpen(true)}
-            className="p-1 rounded-md text-slate-500 hover:text-blue-600 hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition-colors"
+            className="p-1 rounded-md text-slate-500 dark:text-[#D8DEE9] hover:text-[#5E81AC] dark:hover:text-[#88C0D0] hover:bg-slate-200/60 dark:hover:bg-[#3B4252] transition-colors"
             title="Create Project"
           >
             <Plus className="w-3.5 h-3.5" />
@@ -226,14 +225,14 @@ export const Sidebar: React.FC = () => {
             return (
               <div
                 key={project.id}
-                className="group relative flex items-center justify-between rounded-lg hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition-colors"
+                className="group relative flex items-center justify-between rounded-lg hover:bg-slate-200/60 dark:hover:bg-[#3B4252] transition-colors"
               >
                 <button
                   onClick={() => setActiveView({ type: 'project', id: project.id })}
                   className={`flex-1 flex items-center gap-2 px-3 py-1.5 text-sm text-left truncate ${
                     isActive
-                      ? 'text-blue-600 dark:text-blue-400 font-medium'
-                      : 'text-slate-700 dark:text-slate-300'
+                      ? 'text-[#5E81AC] dark:text-[#88C0D0] font-semibold'
+                      : 'text-slate-700 dark:text-[#ECEFF4]'
                   }`}
                 >
                   <ProjectIcon project={project} />
@@ -242,7 +241,7 @@ export const Sidebar: React.FC = () => {
 
                 <div className="flex items-center gap-1 pr-2">
                   {count > 0 && (
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-slate-200 dark:bg-[#434C5E] text-slate-600 dark:text-[#ECEFF4]">
                       {count}
                     </span>
                   )}
@@ -251,7 +250,7 @@ export const Sidebar: React.FC = () => {
                       e.stopPropagation();
                       setProjectMenuId(projectMenuId === project.id ? null : project.id);
                     }}
-                    className="opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-slate-300/60 dark:hover:bg-slate-700 text-slate-500 transition-opacity"
+                    className="opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-slate-300/60 dark:hover:bg-[#434C5E] text-slate-500 dark:text-[#D8DEE9] transition-opacity"
                     title="Project options"
                   >
                     <MoreVertical className="w-3.5 h-3.5" />
@@ -262,14 +261,14 @@ export const Sidebar: React.FC = () => {
                 {projectMenuId === project.id && (
                   <div
                     onClick={(e) => e.stopPropagation()}
-                    className="absolute right-0 top-8 z-30 w-40 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-lg py-1 text-xs"
+                    className="absolute right-0 top-8 z-30 w-40 bg-white dark:bg-[#3B4252] border border-slate-200 dark:border-[#4C566A] rounded-lg shadow-lg py-1 text-xs"
                   >
                     <button
                       onClick={() => {
                         setEditingProject(project);
                         setProjectMenuId(null);
                       }}
-                      className="w-full flex items-center gap-2 px-3 py-1.5 text-left text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700"
+                      className="w-full flex items-center gap-2 px-3 py-1.5 text-left text-slate-700 dark:text-[#ECEFF4] hover:bg-slate-100 dark:hover:bg-[#434C5E]"
                     >
                       <Edit2 className="w-3.5 h-3.5" />
                       <span>Edit Project</span>
@@ -279,9 +278,9 @@ export const Sidebar: React.FC = () => {
                         toggleProjectFavorite(project.id);
                         setProjectMenuId(null);
                       }}
-                      className="w-full flex items-center gap-2 px-3 py-1.5 text-left text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700"
+                      className="w-full flex items-center gap-2 px-3 py-1.5 text-left text-slate-700 dark:text-[#ECEFF4] hover:bg-slate-100 dark:hover:bg-[#434C5E]"
                     >
-                      <Star className="w-3.5 h-3.5 text-amber-500" />
+                      <Star className="w-3.5 h-3.5 text-[#EBCB8B]" />
                       <span>{project.is_favorite ? 'Remove Favorite' : 'Add to Favorites'}</span>
                     </button>
                     <button
@@ -291,7 +290,7 @@ export const Sidebar: React.FC = () => {
                         }
                         setProjectMenuId(null);
                       }}
-                      className="w-full flex items-center gap-2 px-3 py-1.5 text-left text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30"
+                      className="w-full flex items-center gap-2 px-3 py-1.5 text-left text-[#BF616A] dark:text-[#BF616A] hover:bg-red-50 dark:hover:bg-[#BF616A]/20"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                       <span>Delete</span>
@@ -304,38 +303,57 @@ export const Sidebar: React.FC = () => {
         </div>
       </div>
 
-      {/* Nextcloud Sync Quick Bar */}
-      {nextcloud.enabled && (
-        <div className="px-3 py-2 border-t border-slate-200/80 dark:border-slate-800/80 bg-slate-100/50 dark:bg-slate-850/50 flex items-center justify-between text-xs">
-          <div className="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 truncate">
-            <Cloud className="w-3.5 h-3.5 text-cyan-500 shrink-0" />
-            <span className="truncate">Nextcloud Sync</span>
+      {/* CalDAV / Account Sync Status */}
+      {caldav.enabled && (
+        <div
+          onClick={() => syncCaldavNow()}
+          className="px-3 py-2 border-t border-slate-200/80 dark:border-[#4C566A] bg-slate-100/60 dark:bg-[#3B4252] flex items-center justify-between text-xs cursor-pointer hover:bg-slate-200/60 dark:hover:bg-[#434C5E] transition-colors"
+          title={caldav.lastSyncedAt ? `Click to sync. Last synced: ${caldav.lastSyncedAt}` : 'Click to sync now'}
+        >
+          <div className="flex items-center gap-2 min-w-0">
+            <div className="relative flex items-center justify-center shrink-0">
+              <span className={`w-2 h-2 rounded-full ${isSyncingCaldav ? 'bg-amber-400 animate-ping' : 'bg-emerald-500'}`} />
+            </div>
+            <div className="flex flex-col min-w-0">
+              <span className="font-semibold text-slate-800 dark:text-[#ECEFF4] truncate text-[11px]">
+                {caldav.providerPreset === 'gnome' ? 'GNOME Account' :
+                 caldav.providerPreset === 'android' ? 'Android Account' :
+                 caldav.providerPreset === 'nextcloud' ? 'Nextcloud Sync' :
+                 caldav.providerPreset === 'google' ? 'Google Sync' : 'CalDAV Sync'}
+              </span>
+              <span className="text-[10px] text-slate-500 dark:text-[#D8DEE9] truncate">
+                {isSyncingCaldav ? 'Syncing now...' : caldav.lastSyncedAt ? `Synced ${caldav.lastSyncedAt}` : 'Auto-sync active'}
+              </span>
+            </div>
           </div>
+
           <button
-            onClick={() => syncNextcloudNow()}
-            disabled={isSyncingNextcloud}
-            className="p-1 text-slate-500 hover:text-blue-600 transition-colors disabled:opacity-50"
-            title={nextcloud.lastSyncedAt ? `Last synced at ${nextcloud.lastSyncedAt}` : 'Sync with Nextcloud'}
+            onClick={(e) => {
+              e.stopPropagation();
+              syncCaldavNow();
+            }}
+            disabled={isSyncingCaldav}
+            className="p-1 rounded text-slate-500 dark:text-[#D8DEE9] hover:text-[#88C0D0] transition-colors disabled:opacity-50"
           >
-            <RefreshCw className={`w-3.5 h-3.5 ${isSyncingNextcloud ? 'animate-spin text-blue-500' : ''}`} />
+            <RefreshCw className={`w-3.5 h-3.5 ${isSyncingCaldav ? 'animate-spin text-[#88C0D0]' : ''}`} />
           </button>
         </div>
       )}
 
       {/* Bottom Mini Productivity Progress Widget */}
-      <div className="p-3 border-t border-slate-200/80 dark:border-slate-800/80 bg-white/50 dark:bg-slate-900/40">
-        <div className="flex items-center justify-between text-xs text-slate-600 dark:text-slate-400 mb-1.5">
+      <div className="p-3 border-t border-slate-200/80 dark:border-[#4C566A] bg-white/50 dark:bg-[#3B4252]/40">
+        <div className="flex items-center justify-between text-xs text-slate-600 dark:text-[#D8DEE9] mb-1.5">
           <span className="flex items-center gap-1 font-medium">
-            <Sparkles className="w-3.5 h-3.5 text-blue-500" />
+            <Sparkles className="w-3.5 h-3.5 text-[#88C0D0]" />
             Daily Goal
           </span>
-          <span className="font-semibold text-slate-700 dark:text-slate-300">
+          <span className="font-semibold text-slate-700 dark:text-[#ECEFF4]">
             {completedTodayCount} / {dailyGoal}
           </span>
         </div>
-        <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+        <div className="w-full h-1.5 bg-slate-200 dark:bg-[#434C5E] rounded-full overflow-hidden">
           <div
-            className="h-full bg-blue-600 dark:bg-blue-500 transition-all duration-300 rounded-full"
+            className="h-full bg-[#5E81AC] dark:bg-[#88C0D0] transition-all duration-300 rounded-full"
             style={{ width: `${progressPercent}%` }}
           />
         </div>

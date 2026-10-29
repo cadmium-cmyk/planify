@@ -104,17 +104,17 @@ export const ScheduledView: React.FC = () => {
   return (
     <div className="flex-1 overflow-y-auto p-4 sm:p-6 max-w-4xl mx-auto space-y-6">
       {/* Top Days Quick Selector Strip */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-3 shadow-2xs">
+      <div className="bg-white dark:bg-[#3B4252] rounded-2xl border border-slate-200 dark:border-[#4C566A] p-3 shadow-2xs transition-colors">
         <div className="flex items-center justify-between mb-3 px-1">
-          <span className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5 uppercase tracking-wider">
-            <CalendarDays className="w-3.5 h-3.5 text-purple-500" />
+          <span className="text-xs font-semibold text-slate-700 dark:text-[#ECEFF4] flex items-center gap-1.5 uppercase tracking-wider">
+            <CalendarDays className="w-3.5 h-3.5 text-[#B48EAD]" />
             Schedule Timeline (Tasks & Calendar Events)
           </span>
 
           <div className="flex items-center gap-2">
             <button
               onClick={() => setIsAddingEvent(true)}
-              className="text-xs text-purple-600 dark:text-purple-400 hover:underline flex items-center gap-1 font-medium"
+              className="text-xs text-[#5E81AC] dark:text-[#88C0D0] hover:underline flex items-center gap-1 font-medium"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Add Event</span>
@@ -122,7 +122,7 @@ export const ScheduledView: React.FC = () => {
             {selectedDateFilter && (
               <button
                 onClick={() => setSelectedDateFilter(null)}
-                className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                className="text-xs text-[#5E81AC] dark:text-[#88C0D0] hover:underline"
               >
                 Show all dates
               </button>
@@ -139,10 +139,10 @@ export const ScheduledView: React.FC = () => {
                 onClick={() => setSelectedDateFilter(isSelected ? null : item.dateStr)}
                 className={`flex-1 min-w-[54px] py-2 px-1 rounded-xl flex flex-col items-center justify-center text-xs transition-all ${
                   isSelected
-                    ? 'bg-purple-600 text-white font-semibold shadow-xs'
+                    ? 'bg-[#5E81AC] text-white font-semibold shadow-xs'
                     : item.isToday
-                    ? 'bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800'
-                    : 'hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
+                    ? 'bg-[#5E81AC]/15 text-[#5E81AC] dark:bg-[#88C0D0]/20 dark:text-[#88C0D0] border border-[#5E81AC]/30 dark:border-[#88C0D0]/40'
+                    : 'hover:bg-slate-100 dark:hover:bg-[#434C5E] text-slate-700 dark:text-[#ECEFF4]'
                 }`}
               >
                 <span className="text-[10px] uppercase opacity-75">{item.dayName}</span>
@@ -151,13 +151,13 @@ export const ScheduledView: React.FC = () => {
                 <div className="flex items-center gap-0.5">
                   {item.taskCount > 0 && (
                     <span
-                      className={`w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-white' : 'bg-blue-500'}`}
+                      className={`w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-white' : 'bg-[#88C0D0]'}`}
                       title={`${item.taskCount} task(s)`}
                     />
                   )}
                   {item.eventCount > 0 && (
                     <span
-                      className={`w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-amber-200' : 'bg-purple-500'}`}
+                      className={`w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-amber-200' : 'bg-[#B48EAD]'}`}
                       title={`${item.eventCount} event(s)`}
                     />
                   )}
@@ -171,21 +171,21 @@ export const ScheduledView: React.FC = () => {
       {/* Add Event Modal */}
       {isAddingEvent && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs"
           onClick={() => setIsAddingEvent(false)}
         >
           <div
-            className="w-full max-w-md bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-5 space-y-4"
+            className="w-full max-w-md bg-white dark:bg-[#3B4252] rounded-2xl shadow-xl border border-slate-200 dark:border-[#4C566A] p-5 space-y-4 transition-colors"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between">
-              <h3 className="font-semibold text-base text-slate-800 dark:text-slate-100 flex items-center gap-2">
-                <CalendarIcon className="w-5 h-5 text-purple-600" />
+              <h3 className="font-semibold text-base text-slate-800 dark:text-[#ECEFF4] flex items-center gap-2">
+                <CalendarIcon className="w-5 h-5 text-[#B48EAD]" />
                 <span>New Calendar Event</span>
               </h3>
               <button
                 onClick={() => setIsAddingEvent(false)}
-                className="p-1 text-slate-400 hover:text-slate-600"
+                className="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-[#ECEFF4]"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -193,7 +193,7 @@ export const ScheduledView: React.FC = () => {
 
             <form onSubmit={handleCreateEvent} className="space-y-3">
               <div>
-                <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
+                <label className="block text-xs font-medium text-slate-600 dark:text-[#D8DEE9] mb-1">
                   Event Title
                 </label>
                 <input
@@ -202,37 +202,37 @@ export const ScheduledView: React.FC = () => {
                   placeholder="e.g. Design Review Sync, Team Lunch"
                   value={eventTitle}
                   onChange={(e) => setEventTitle(e.target.value)}
-                  className="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white outline-none focus:border-purple-500"
+                  className="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 dark:border-[#4C566A] bg-slate-50 dark:bg-[#2E3440] text-slate-900 dark:text-[#ECEFF4] outline-none focus:border-[#88C0D0]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">
+                  <label className="block text-[11px] font-medium text-slate-600 dark:text-[#D8DEE9] mb-1">
                     Date
                   </label>
                   <input
                     type="date"
                     value={eventDate}
                     onChange={(e) => setEventDate(e.target.value)}
-                    className="w-full text-xs px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white outline-none"
+                    className="w-full text-xs px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-[#4C566A] bg-white dark:bg-[#2E3440] text-slate-900 dark:text-[#ECEFF4] outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">
+                  <label className="block text-[11px] font-medium text-slate-600 dark:text-[#D8DEE9] mb-1">
                     Time
                   </label>
                   <input
                     type="time"
                     value={eventTime}
                     onChange={(e) => setEventTime(e.target.value)}
-                    className="w-full text-xs px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white outline-none"
+                    className="w-full text-xs px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-[#4C566A] bg-white dark:bg-[#2E3440] text-slate-900 dark:text-[#ECEFF4] outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
+                <label className="block text-xs font-medium text-slate-600 dark:text-[#D8DEE9] mb-1">
                   Location (optional)
                 </label>
                 <input
@@ -240,18 +240,18 @@ export const ScheduledView: React.FC = () => {
                   placeholder="e.g. Room B / Video Call"
                   value={eventLocation}
                   onChange={(e) => setEventLocation(e.target.value)}
-                  className="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white outline-none focus:border-purple-500"
+                  className="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 dark:border-[#4C566A] bg-slate-50 dark:bg-[#2E3440] text-slate-900 dark:text-[#ECEFF4] outline-none focus:border-[#88C0D0]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
+                <label className="block text-xs font-medium text-slate-600 dark:text-[#D8DEE9] mb-1">
                   Calendar Feed
                 </label>
                 <select
                   value={eventCalendarId}
                   onChange={(e) => setEventCalendarId(e.target.value)}
-                  className="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white outline-none"
+                  className="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 dark:border-[#4C566A] bg-slate-50 dark:bg-[#2E3440] text-slate-900 dark:text-[#ECEFF4] outline-none"
                 >
                   {calendarFeeds.map((f) => (
                     <option key={f.id} value={f.id}>
@@ -261,18 +261,18 @@ export const ScheduledView: React.FC = () => {
                 </select>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+              <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100 dark:border-[#4C566A]">
                 <button
                   type="button"
                   onClick={() => setIsAddingEvent(false)}
-                  className="px-3 py-1.5 text-xs text-slate-600 dark:text-slate-400"
+                  className="px-3 py-1.5 text-xs text-slate-600 dark:text-[#D8DEE9]"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={!eventTitle.trim()}
-                  className="px-4 py-1.5 bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white rounded-lg text-xs font-medium"
+                  className="px-4 py-1.5 bg-[#5E81AC] hover:bg-[#81A1C1] disabled:opacity-50 text-white rounded-lg text-xs font-semibold"
                 >
                   Create Event
                 </button>
@@ -286,7 +286,7 @@ export const ScheduledView: React.FC = () => {
       {selectedDateFilter ? (
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <h2 className="font-semibold text-sm text-slate-800 dark:text-slate-200">
+            <h2 className="font-semibold text-sm text-slate-800 dark:text-[#ECEFF4]">
               Schedule for {new Date(selectedDateFilter + 'T00:00:00').toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}
             </h2>
           </div>
@@ -308,7 +308,7 @@ export const ScheduledView: React.FC = () => {
 
             {activeEvents.filter((e) => e.startDate === selectedDateFilter).length === 0 &&
               activeDatedTasks.filter((t) => t.due_date === selectedDateFilter).length === 0 && (
-                <p className="text-xs text-slate-400 py-6 text-center">Nothing scheduled for this date.</p>
+                <p className="text-xs text-slate-400 dark:text-[#D8DEE9] py-6 text-center">Nothing scheduled for this date.</p>
               )}
           </div>
         </div>
@@ -318,7 +318,7 @@ export const ScheduledView: React.FC = () => {
           {/* Overdue Tasks Section */}
           {overdueTasks.length > 0 && (
             <div className="space-y-2">
-              <div className="flex items-center justify-between text-xs font-semibold text-rose-600 dark:text-rose-400">
+              <div className="flex items-center justify-between text-xs font-semibold text-[#BF616A]">
                 <div className="flex items-center gap-1.5">
                   <AlertTriangle className="w-4 h-4" />
                   <span>Overdue Tasks ({overdueTasks.length})</span>
@@ -336,13 +336,13 @@ export const ScheduledView: React.FC = () => {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <h3 className="font-semibold text-sm text-slate-800 dark:text-slate-200">
+                <h3 className="font-semibold text-sm text-slate-800 dark:text-[#ECEFF4]">
                   Today
                 </h3>
-                <span className="text-xs text-slate-400">
+                <span className="text-xs text-slate-400 dark:text-[#D8DEE9]">
                   {new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
                 </span>
-                <span className="text-xs px-2 py-0.2 rounded-full bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 font-medium">
+                <span className="text-xs px-2 py-0.2 rounded-full bg-[#5E81AC]/20 text-[#5E81AC] dark:bg-[#88C0D0]/20 dark:text-[#88C0D0] font-medium">
                   {todayTasks.length} tasks · {todayEvents.length} events
                 </span>
               </div>
@@ -356,7 +356,7 @@ export const ScheduledView: React.FC = () => {
                 <TaskRow key={task.id} task={task} />
               ))}
               {todayEvents.length === 0 && todayTasks.length === 0 && (
-                <p className="text-xs text-slate-400 py-3 italic">Nothing scheduled for today.</p>
+                <p className="text-xs text-slate-400 dark:text-[#D8DEE9] py-3 italic">Nothing scheduled for today.</p>
               )}
             </div>
           </div>
@@ -365,10 +365,10 @@ export const ScheduledView: React.FC = () => {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <h3 className="font-semibold text-sm text-slate-800 dark:text-slate-200">
+                <h3 className="font-semibold text-sm text-slate-800 dark:text-[#ECEFF4]">
                   Tomorrow
                 </h3>
-                <span className="text-xs px-2 py-0.2 rounded-full bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 font-medium">
+                <span className="text-xs px-2 py-0.2 rounded-full bg-[#5E81AC]/20 text-[#5E81AC] dark:bg-[#88C0D0]/20 dark:text-[#88C0D0] font-medium">
                   {tomorrowTasks.length} tasks · {tomorrowEvents.length} events
                 </span>
               </div>
@@ -382,7 +382,7 @@ export const ScheduledView: React.FC = () => {
                 <TaskRow key={task.id} task={task} />
               ))}
               {tomorrowEvents.length === 0 && tomorrowTasks.length === 0 && (
-                <p className="text-xs text-slate-400 py-3 italic">Nothing scheduled for tomorrow.</p>
+                <p className="text-xs text-slate-400 dark:text-[#D8DEE9] py-3 italic">Nothing scheduled for tomorrow.</p>
               )}
             </div>
           </div>
@@ -402,10 +402,10 @@ export const ScheduledView: React.FC = () => {
               <div key={dateStr} className="space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <h3 className="font-semibold text-sm text-slate-700 dark:text-slate-300">
+                    <h3 className="font-semibold text-sm text-slate-700 dark:text-[#ECEFF4]">
                       {formatted}
                     </h3>
-                    <span className="text-xs px-2 py-0.2 rounded-full bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 font-medium">
+                    <span className="text-xs px-2 py-0.2 rounded-full bg-[#5E81AC]/20 text-[#5E81AC] dark:bg-[#88C0D0]/20 dark:text-[#88C0D0] font-medium">
                       {dateTasks.length} tasks · {dateEvents.length} events
                     </span>
                   </div>

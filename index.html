@@ -4,6 +4,51 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/data/icons/hicolor/scalable/apps/io.github.alainm23.planify.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function() {
+        var OriginalWebSocket = window.WebSocket;
+        if (!OriginalWebSocket) return;
+        window.WebSocket = function(url, protocols) {
+          if (typeof url === 'string' && (url.includes('vite') || url.includes('3000') || url.includes('ws://') || url.includes('wss://'))) {
+            var dummy = {
+              readyState: 3,
+              bufferedAmount: 0,
+              extensions: '',
+              protocol: '',
+              binaryType: 'blob',
+              url: url,
+              CONNECTING: 0,
+              OPEN: 1,
+              CLOSING: 2,
+              CLOSED: 3,
+              addEventListener: function() {},
+              removeEventListener: function() {},
+              dispatchEvent: function() { return true; },
+              send: function() {},
+              close: function() {},
+              onerror: null,
+              onclose: null,
+              onmessage: null,
+              onopen: null,
+            };
+            return dummy;
+          }
+          return new OriginalWebSocket(url, protocols);
+        };
+        window.WebSocket.prototype = OriginalWebSocket.prototype;
+      })();
+      window.addEventListener('error', function(e) {
+        if (e.message && (e.message.includes('WebSocket') || e.filename?.includes('@vite/client'))) {
+          e.stopImmediatePropagation();
+          e.preventDefault();
+        }
+      }, true);
+      window.addEventListener('unhandledrejection', function(e) {
+        if (e.reason && (String(e.reason).includes('WebSocket') || String(e.reason).includes('@vite/client'))) {
+          e.preventDefault();
+        }
+      });
+    </script>
     <title>Planify</title>
     <meta name="description" content="Never worry about forgetting things again. Modern task manager with projects, boards, calendar scheduling, labels, and productivity tracking." />
     <meta property="og:title" content="Planify" />
